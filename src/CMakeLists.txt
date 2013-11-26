@@ -1,0 +1,6 @@
+include_subdirectories(display)
+include_subdirectories(cameras)
+include_subdirectories(engine)
+include_subdirectories(lights)
+include_subdirectories(materials)
+include_subdirectories(tools)
