@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scene x="500" y="500">
+  <objects>
+    <object type="sphere" center="250,250,-1000" r="150" />
+    <object type="triangle" v1="300,600,-800" v2="0,100,-1000" v3="450,20,-100" />
+  </objects>
+</scene>
