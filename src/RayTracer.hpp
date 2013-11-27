@@ -7,11 +7,21 @@
 
 class RayTracer
 {
+private:
+  std::string in;
+  std::string out;
+
 public:
   ~RayTracer();
 
 public:
-  RayTracer();
+  RayTracer(std::string _in, std::string _out);
+
+public:
+  void build();
+  void trace();
+  void save();
+
 };
 
 #endif
