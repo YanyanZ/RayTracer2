@@ -1,12 +1,10 @@
-#ifndef SPHERE_HPP
-# define SPHERE_HPP
+#ifndef TRIANGLE_HPP
+# define TRIANGLE_HPP
 
-# include <cmath>
-
-# include <engine/Ray.hpp>
 # include <tools/Vector.hpp>
 # include <tools/Color.hpp>
-# include <objects/Shape.hpp>
+# include <engine/Ray.hpp>
+# include <engine/objects/Shape.hpp>
 
 using namespace Tools;
 
@@ -14,16 +12,20 @@ namespace Objects
 {
   namespace Basic
   {
-    class Sphere : public Shape
+    class Triangle : public Shape
     {
     private:
-      Vector<float> center;
-      float radius;
+      Vector<float> s0;
+      Vector<float> s1;
+      Vector<float> s2;
       RGBColor<float> color;
 
     public:
-      ~Sphere();
-      Sphere(const Vector<float> o, float r, const RGBColor<float> c);
+      ~Triangle();
+      Triangle(const Vector<float> _s0,
+	       const Vector<float> _s1,
+	       const Vector<float> _s2,
+	       const RGBColor<float> rgv);
 
     public:
       virtual bool hit(const Ray& r, float tmin, float tmax, float time,

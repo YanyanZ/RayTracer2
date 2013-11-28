@@ -5,9 +5,9 @@
 # include <iostream>
 # include <vector>
 
-# include <objects/Shape.hpp>
-# include <objects/basic/Sphere.hpp>
-# include <objects/basic/Triangle.hpp>
+# include <engine/objects/Shape.hpp>
+# include <engine/objects/basic/Sphere.hpp>
+# include <engine/objects/basic/Triangle.hpp>
 
 # include <parser/xml/src/pugixml.hpp>
 

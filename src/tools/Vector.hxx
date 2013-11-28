@@ -20,6 +20,12 @@ Tools::Vector<T>::Vector(T a, T b, T c)
 }
 
 template <typename T>
+Vector<T> Tools::Vector<T>::operator=(const Vector& v)
+{
+  return (Vector<T>(v.x, v.y, v.z));
+}
+
+template <typename T>
 bool Tools::Vector<T>::operator==(const Vector& v)
 {
   return (v.x == x && v.y == y && v.z == z);

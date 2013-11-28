@@ -6,14 +6,17 @@ Engine::Ray::~Ray()
 
 Engine::Ray::Ray()
 {
-  data[0] = Vector<float>();
-  data[1] = Vector<float>();
 }
 
 Engine::Ray::Ray(const Vector<float> a, const Vector<float> b)
 {
-  data[0] = a;
-  data[1] = b;
+  data[0].x = a.x;
+  data[0].y = a.y;
+  data[0].z = a.z;
+
+  data[1].x = b.x;
+  data[1].y = b.y;
+  data[1].z = b.z;
 }
 
 Vector<float> Engine::Ray::origin() const
