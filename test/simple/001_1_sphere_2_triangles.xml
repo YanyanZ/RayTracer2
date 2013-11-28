@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scene x="500" y="500">
   <objects>
-    <object type="sphere" center="250;250;-1000" radius="150" />
     <object type="triangle" v0="300;600;-800" v1="0;100;-1000" v2="450;20;-100" />
+    <object type="triangle" v0="30;60;-800" v1="0;10;-100" v2="40;20;-10" />
+    <object type="sphere" center="250;250;-1000" radius="150" />
+    <object type="sphere" center="25;25;-700" radius="15" />
   </objects>
 </scene>
