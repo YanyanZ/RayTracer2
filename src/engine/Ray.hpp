@@ -28,11 +28,11 @@ namespace Engine
     Vector<float> pointAt(float t) const;
 
   public:
-    Bool operator==(const Ray& r);
-    Bool operator!=(const Ray& r);
+    bool operator==(const Ray& r);
+    bool operator!=(const Ray& r);
     
   public:
-    std::ostream operator<<(std::ostream flux, const Ray& r);
+    std::ostream& operator<<(std::ostream& flux);
   };
 }
 

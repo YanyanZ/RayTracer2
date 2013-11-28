@@ -31,31 +31,31 @@ bool Tools::RGBColor<T>::operator!=(const RGBColor& c)
 }
 
 template <typename T>
-RGBColor Tools::RGBColor<T>::operator+(const RGBColor& c)
+RGBColor<T> Tools::RGBColor<T>::operator+(const RGBColor& c)
 {
   return (RGBColor(c.r + r, c.g + g, c.b + b));
 }
 
 template <typename T>
-RGBColor Tools::RGBColor<T>::operator-(const RGBColor& c)
+RGBColor<T> Tools::RGBColor<T>::operator-(const RGBColor& c)
 {
   return (RGBColor(-c.r + r, -c.g + g, -c.b + b));
 }
 
 template <typename T>
-RGBColor Tools::RGBColor<T>::operator*(const RGBColor& c)
+RGBColor<T> Tools::RGBColor<T>::operator*(const RGBColor& c)
 {
   return (RGBColor(c.r * r, c.g * g, c.b * b));
 }
 
 template <typename T>
-RGBColor Tools::RGBColor<T>::operator*(const T a)
+RGBColor<T> Tools::RGBColor<T>::operator*(const T a)
 {
   return (RGBColor(a * r, a * g, a * b));
 }
 
 template <typename T>
-std::ostream& Tools::RGBColor<T>::operator<<(std::ostream& flux, Vector const&v)
+std::ostream& Tools::RGBColor<T>::operator<<(std::ostream& flux)
 {
   flux << "Red: " << r << " Green: " << g << " Blue: " << b;
   return flux;

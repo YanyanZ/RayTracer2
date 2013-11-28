@@ -4,19 +4,19 @@ Objects::Basic::Sphere::~Sphere()
 {
 }
 
-Objects::Basic::Sphere::Sphere(const Vector<float> o, float r, const RGBColor c)
-  : center (o), radius (r); color (c)
+Objects::Basic::Sphere::Sphere(const Vector<float> o, float r, const RGBColor<float> c)
+  : center (o), radius (r), color (c)
 {
 }
 
 bool Objects::Basic::Sphere::hit(const Ray& r, float tmin, float tmax, float time,
 				 HitRecord& hr)
 {
-  Vector<float> tmp = r.origin - center;
+  Vector<float> tmp = r.origin() - center;
 
-  double a = dot(r.direction(), r.direction());
-  double b = 2 * dot(r.direction(), tmp);
-  double c = dot(tmp, tmp) - radius * radius;
+  double a = Tools::Vector<float>::dot(r.direction(), r.direction());
+  double b = 2 * Tools::Vector<float>::dot(r.direction(), tmp);
+  double c = Tools::Vector<float>::dot(tmp, tmp) - radius * radius;
 
   double delta = b*b - 4 * a * c;
 
@@ -30,9 +30,9 @@ bool Objects::Basic::Sphere::hit(const Ray& r, float tmin, float tmax, float tim
     if (t < tmin || t > tmax)
       return false;
 
-    rh.t = t;
-    rh.normal = unitVector(r.origin() + t * r.direction() - center);
-    rh.color = color;
+    hr.t = t;
+    hr.normal = Tools::Vector<float>::unitVector(r.origin() + r.direction() * t - center);
+    hr.color = color;
     return true;
   }
 
@@ -41,11 +41,11 @@ bool Objects::Basic::Sphere::hit(const Ray& r, float tmin, float tmax, float tim
 
 bool Objects::Basic::Sphere::shadowHit(const Ray& r, float tmin, float tmax, float time)
 {
-  Vector<float> tmp = r.origin - center;
+  Vector<float> tmp = r.origin() - center;
 
-  double a = dot(r.direction(), r.direction());
-  double b = 2 * dot(r.direction(), tmp);
-  double c = dot(tmp, tmp) - radius * radius;
+  double a = Tools::Vector<float>::dot(r.direction(), r.direction());
+  double b = 2 * Tools::Vector<float>::dot(r.direction(), tmp);
+  double c = Tools::Vector<float>::dot(tmp, tmp) - radius * radius;
 
   double delta = b*b - 4 * a * c;
 

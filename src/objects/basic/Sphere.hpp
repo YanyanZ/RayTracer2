@@ -1,6 +1,8 @@
 #ifndef SPHERE_HPP
 # define SPHERE_HPP
 
+# include <cmath>
+
 # include <engine/Ray.hpp>
 # include <tools/Vector.hpp>
 # include <tools/Color.hpp>
@@ -17,11 +19,11 @@ namespace Objects
     private:
       Vector<float> center;
       float radius;
-      RGBColor color;
+      RGBColor<float> color;
 
     public:
       ~Sphere();
-      Sphere(const Vector<float> o, float r, const RGBColor& c);
+      Sphere(const Vector<float> o, float r, const RGBColor<float> c);
 
     public:
       virtual bool hit(const Ray& r, float tmin, float tmax, float time,

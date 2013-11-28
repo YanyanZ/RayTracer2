@@ -4,9 +4,9 @@ Random::~Random()
 {
 }
 
-Random::Random(unsigned long long _seed = 7564231ULL)
+Random::Random(unsigned long long _seed)
 {
-  seed = seed;
+  seed = _seed;
   mult = 62089911ULL;
   llong_max = 4294967295ULL;
   float_max = 4294967295.0f;

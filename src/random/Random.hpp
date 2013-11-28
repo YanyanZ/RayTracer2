@@ -4,8 +4,9 @@
 class Random
 {
 private:
+  unsigned long long seed;
   unsigned long long mult;
-  unsigend long long llong_max;
+  unsigned long long llong_max;
   float float_max;
 
 public:

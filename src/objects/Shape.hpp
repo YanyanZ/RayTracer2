@@ -6,16 +6,16 @@
 # include <tools/Vector.hpp>
 
 using namespace Tools;
+using namespace Engine;
 
 namespace Objects
 {
-
   struct HitRecord
   {
     float t;
     Vector<float> normal;
-    RGBColor color;
-  }
+    RGBColor<float> color;
+  };
 
   class Shape
   {

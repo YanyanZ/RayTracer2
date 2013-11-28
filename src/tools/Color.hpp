@@ -1,6 +1,8 @@
 #ifndef COLOR_HPP__
 # define COLOR_HPP__
 
+# include <iostream>
+
 namespace Tools
 {
   template <typename T>
@@ -24,16 +26,16 @@ namespace Tools
     bool operator!=(const RGBColor& c);
 
   public:
-    RGBColor operator+(const RGBColor& c);
-    RGBColor operator-(const RGBColor& c);
-    RGBColor operator*(const RGBColor& c);
-    RGBColor operator*(const T& a);
+    RGBColor<T> operator+(const RGBColor& c);
+    RGBColor<T> operator-(const RGBColor& c);
+    RGBColor<T> operator*(const RGBColor& c);
+    RGBColor<T> operator*(const T a);
 
   public:
-    std::ostream& operator<<(std::ostream& flux, Vector const&v);
+    std::ostream& operator<<(std::ostream& flux);
   };
 
-  # include "RGBColor.hxx"
+  # include "Color.hxx"
 }
 
 #endif
