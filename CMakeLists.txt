@@ -19,9 +19,10 @@ add_executable(${PRG_NAME} ${SOURCE})
 
 # Add libs to the project
 target_link_libraries(${PRG_NAME} ${Boost_LIBRARIES})
+target_link_libraries(${PRG_NAME} ${OpenCV_LIBRARIES})
 target_link_libraries(${PRG_NAME} RayTracer)
 target_link_libraries(${PRG_NAME} Tools)
-#target_link_libraries(${PRG_NAME} Display)
+target_link_libraries(${PRG_NAME} Display)
 target_link_libraries(${PRG_NAME} Engine)
 #target_link_libraries(${PRG_NAME} Mesh)
 target_link_libraries(${PRG_NAME} PugiXML)

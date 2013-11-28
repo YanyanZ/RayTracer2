@@ -14,11 +14,13 @@ RayTracer::RayTracer(std::string _in, std::string _out)
 void RayTracer::build()
 {
   pugi::xml_document doc;
-
-  //int x = doc.child("scene").attribute("x").as_int();
-  //int y = doc.child("scene").attribute("y").as_int();
+  doc.load_file(in.c_str());
 
   spheres = new std::vector<Objects::Basic::Sphere>();
+  triangles = new std::vector<Objects::Basic::Triangle>();
+
+  width = doc.child("scene").attribute("x").as_int();
+  heigh = doc.child("scene").attribute("y").as_int();
 
   pugi::xml_node first = doc.child("scene").child("objects");
   for (pugi::xml_node obj = first.child("object"); obj; obj = obj.next_sibling("object"))
@@ -82,14 +84,62 @@ void RayTracer::build()
 	getline(ssss, substr, ';');
 	v2.push_back(std::stof(substr));
       }
+      
+      Vector<float> ve0 = Vector<float>(v0[0], v0[1], v0[2]);
+      Vector<float> ve1 = Vector<float>(v1[0], v1[1], v1[2]);
+      Vector<float> ve2 = Vector<float>(v2[0], v2[1], v2[2]);
+
+      triangles->push_back(Objects::Basic::Triangle(ve0, ve1, ve2,
+						    RGBColor<float>(0, 255, 0)));
     }
   }
+
+  for (unsigned int i = 0; i < spheres->size(); i++)
+  {
+    std::cout << "[SPHERE] " << (*spheres)[i].center << std::endl;
+  }
+
+  for (unsigned int i = 0; i < triangles->size(); i++)
+  {
+    std::cout << "[TRIANGLE] " << (*triangles)[i].s0 << std::endl;
+  }
+
 }
 
 void RayTracer::trace()
 {
+  Vector<float> dir(0, 0, -1);
+
+  im.resize(width);
+
+  for (int i = 0; i < width; i++)
+  {
+    im[i].resize(heigh);
+    for (int j = 0; j < heigh; j++)
+    {
+      Objects::HitRecord rec;
+      float tmax = 1000000.0f;
+      Engine::Ray r(Vector<float>(i, j, 0), dir);
+
+
+      for (unsigned int n = 0; n < triangles->size(); n++)
+      {
+	if ((*triangles)[n].hit(r, 0.00001f, tmax, 0, rec) == true)
+	  im[i][j] = rec.color;
+      }
+
+      for (unsigned int n = 0; n < spheres->size(); n++)
+      {
+	if ((*spheres)[n].hit(r, 0.00001f, tmax, 0, rec) == true)
+	  im[i][j] = rec.color;
+      }
+    }
+  }
 }
 
 void RayTracer::save()
 {
+  Display::Image image(im);
+
+  image.show("test");
 }

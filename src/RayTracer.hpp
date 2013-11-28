@@ -4,10 +4,12 @@
 # include <sstream>
 # include <iostream>
 # include <vector>
+# include <string>
 
 # include <engine/objects/Shape.hpp>
 # include <engine/objects/basic/Sphere.hpp>
 # include <engine/objects/basic/Triangle.hpp>
+# include <display/Image.hpp>
 
 # include <parser/xml/src/pugixml.hpp>
 
@@ -18,7 +20,13 @@ private:
   std::string out;
 
 private:
+  std::vector<std::vector<RGBColor<float> > > im;
+
+private:
+  int width;
+  int heigh;
   std::vector<Objects::Basic::Sphere>* spheres;
+  std::vector<Objects::Basic::Triangle>* triangles;
 
 public:
   ~RayTracer();

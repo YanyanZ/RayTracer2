@@ -16,7 +16,7 @@ namespace Objects
   {
     class Sphere : public Shape
     {
-    private:
+    public:
       Vector<float> center;
       float radius;
       RGBColor<float> color;

@@ -9,5 +9,6 @@ add_subdirectory(engine)
 add_subdirectory(parser)
 add_subdirectory(random)
 add_subdirectory(tools)
+add_subdirectory(display)
 
 add_library(RayTracer STATIC ${SOURCES})

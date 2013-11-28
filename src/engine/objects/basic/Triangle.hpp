@@ -14,7 +14,7 @@ namespace Objects
   {
     class Triangle : public Shape
     {
-    private:
+    public:
       Vector<float> s0;
       Vector<float> s1;
       Vector<float> s2;

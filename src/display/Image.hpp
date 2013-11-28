@@ -5,9 +5,7 @@
 # include <opencv2/core/core.hpp>
 # include <opencv2/highgui/highgui.hpp>
 
-# include <boost/log/trivial.hpp>
-
-# include <tools/Colors.hpp>
+# include <tools/Color.hpp>
 
 namespace Display
 {
@@ -21,7 +19,7 @@ namespace Display
 
   public:
     Image(cv::Mat* img);
-    Image(std::vector<std::vector<std::vector<Tools::RGBColor<int> > > > img);
+    Image(std::vector<std::vector<Tools::RGBColor<float> > > img);
 
   public:
     void show(const std::string wname);
