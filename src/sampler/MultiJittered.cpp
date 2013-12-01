@@ -1,2 +1,2 @@
-# include <sampler/MultiJittered.cpp>
+# include <sampler/MultiJittered.hpp>
 

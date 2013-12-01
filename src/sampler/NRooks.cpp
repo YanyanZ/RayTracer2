@@ -1,2 +1,2 @@
-# include <sampler/NRooks.cpp>
+# include <sampler/NRooks.hpp>
 

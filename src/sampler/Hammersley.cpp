@@ -1,3 +1,3 @@
-# include <sampler/Hammersley.cpp>
+# include <sampler/Hammersley.hpp>
 
 

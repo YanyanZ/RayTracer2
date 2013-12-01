@@ -1,4 +1,4 @@
-#include <sampler/Sampler.cpp>
+#include <sampler/Sampler.hpp>
 
 Sampler::Sampler::~Sampler()
 {
@@ -26,19 +26,19 @@ Sampler::Sampler::Sampler(const int num, const int numsts)
 }
 
 Sampler::Sampler::Sampler(const Sampler& s)
- : num_samples(s.num_samples),
-   num_sets(s.num_sets),
-   samples(s.samples),
-   shuffled_indices(s.shuffled_indices),
-   disk_samples(s.disk_samples),
-   hemisphere_samples(s.hemisphere_samples),
-   sphere_samples(s.sphere_samples),
-   count(s.count),
-   jump(s.jump)
+ : num_samples (s.num_samples),
+   num_sets (s.num_sets),
+   count (s.count),
+   jump (s.jump),
+   samples (s.samples),
+   shuffled_indices (s.shuffled_indices),
+   disk_samples (s.disk_samples),
+   hemisphere_samples (s.hemisphere_samples),
+   sphere_samples (s.sphere_samples)
 {
 }
 
-Sampler& Sampler::Sampler::operator=(const Sampler& s)
+Sampler::Sampler& Sampler::Sampler::operator=(const Sampler& s)
 {
   num_samples = s.num_samples;
   num_sets = s.num_sets;
@@ -89,7 +89,7 @@ void Sampler::Sampler::setup_shuffled_indices()
 
   for (int p = 0; p < num_sets; p++)
   {
-    random_suffle(indices.begin(), indices.end());
+    std::random_shuffle(indices.begin(), indices.end());
 
     for (int j = 0; j < num_samples; j++)
       shuffled_indices.push_back(indices[j]);
@@ -162,7 +162,7 @@ void Sampler::Sampler::map_samples_to_hemisphere(const float exp)
     float pv = sin_theta * sin_phi;
     float pw = cos_theta;
 
-    hemisphere_samples.push_back(Point3D(pu, pv, pw));
+    hemisphere_samples.push_back(Vector<float>(pu, pv, pw));
   }
 }
 
@@ -170,7 +170,7 @@ void Sampler::Sampler::map_samples_to_sphere()
 {
   float r1, r2;
   float x, y, z;
-  float rm phi;
+  float r, phi;
 
   sphere_samples.resize(num_samples * num_sets);
 
@@ -198,15 +198,15 @@ Vector<float> Sampler::Sampler::sample_unit_square()
 
 Vector<float> Sampler::Sampler::sample_unit_disk()
 {
-  if (cout % num_samples == 0)
+  if (count % num_samples == 0)
     jump = (rand() % num_sets) * num_samples;
 
-  return (disk_samples[jump + shuffled_indices[jump +cout++ % num_samples]]);
+  return (disk_samples[jump + shuffled_indices[jump + count++ % num_samples]]);
 }
 
 Vector<float> Sampler::Sampler::sample_hemisphere()
 {
-  if (cout % num_samples == 0)
+  if (count % num_samples == 0)
     jump = (rand() % num_sets) * num_samples;
 
   return (hemisphere_samples[jump + shuffled_indices[jump + count++ % num_samples]]);
@@ -217,10 +217,10 @@ Vector<float> Sampler::Sampler::sample_sphere()
   if (count % num_samples == 0)
     jump = (rand() % num_sets) * num_samples;
 
-  return (sphere_samples[jump + shuffled_indices[jump + cout++ % num_samples]]);
+  return (sphere_samples[jump + shuffled_indices[jump + count++ % num_samples]]);
 }
 
-Vecotr<float> Sampler::Sampler::sample_one_set()
+Vector<float> Sampler::Sampler::sample_one_set()
 {
-  return (Samples[cout++ % num_samples]);
+  return (samples[count++ % num_samples]);
 }

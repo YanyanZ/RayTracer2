@@ -3,6 +3,8 @@
 
 # include <vector>
 # include <algorithm>
+# include <random>
+# include <iterator>
 
 # include <tools/Vector.hpp>
 
@@ -13,10 +15,10 @@ namespace Sampler
   class Sampler
   {
   public:
-    unsigned long count;
-    int jump;
     int num_samples;
     int num_sets;
+    unsigned long count;
+    int jump;
 
   public:
     std::vector<Vector<float> > samples;
