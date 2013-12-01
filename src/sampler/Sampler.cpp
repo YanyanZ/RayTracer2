@@ -1,31 +1,31 @@
-#include <engine/sampler/Sampler.cpp>
+#include <sampler/Sampler.cpp>
 
-Engine::Sampler::~Sampler()
+Sampler::Sampler::~Sampler()
 {
 }
 
-Engine::Sampler::Sampler()
+Sampler::Sampler::Sampler()
   : num_samples (1), num_sets (83), count (0), jump (0)
 {
   samples.reserve(num_samples * num_sets);
   setup_shuffled_indices();
 }
 
-Engine::Sampler::Sampler(const int num)
+Sampler::Sampler::Sampler(const int num)
   : num_samples (num), num_sets (83), count (0), jump (0)
 {
   samples.reserve(num_samples * num_sets);
   setup_shuffled_indices();
 }
 
-Engine::Sampler::Sampler(const int num, const int numsts)
+Sampler::Sampler::Sampler(const int num, const int numsts)
   : num_samples (num), num_sets (numsts), count (0), jump (0)
 {
   samples.reserve(num_samples * num_sets);
   setup_shuffled_indices();
 }
 
-Engine::Sampler::Sampler(const Sampler& s)
+Sampler::Sampler::Sampler(const Sampler& s)
  : num_samples(s.num_samples),
    num_sets(s.num_sets),
    samples(s.samples),
@@ -38,7 +38,7 @@ Engine::Sampler::Sampler(const Sampler& s)
 {
 }
 
-Sampler& Engine::Sampler::operator=(const Sampler& s)
+Sampler& Sampler::Sampler::operator=(const Sampler& s)
 {
   num_samples = s.num_samples;
   num_sets = s.num_sets;
@@ -53,7 +53,7 @@ Sampler& Engine::Sampler::operator=(const Sampler& s)
   return (*this);
 }
 
-void Engine::Sampler::shuffle_x_coordinates()
+void Sampler::Sampler::shuffle_x_coordinates()
 {
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i < num_samples - 1; i++)
@@ -66,7 +66,7 @@ void Engine::Sampler::shuffle_x_coordinates()
     }
 }
 
-void Engine::Sampler::shuffle_y_coordinates()
+void Sampler::Sampler::shuffle_y_coordinates()
 {
   for (int p = 0; p < num_sets; p++)
     for (int i = 0; i < num_samples - 1; i++)
@@ -79,7 +79,7 @@ void Engine::Sampler::shuffle_y_coordinates()
     }
 }
 
-void Engine::Sampler::setup_shuffled_indices()
+void Sampler::Sampler::setup_shuffled_indices()
 {
   shuffled_indices.resize(num_samples * num_sets);
   std::vector<int> indices;
@@ -96,7 +96,7 @@ void Engine::Sampler::setup_shuffled_indices()
   }
 }
 
-void Engine::Sampler::map_samples_to_unit_disk()
+void Sampler::Sampler::map_samples_to_unit_disk()
 {
   int size = samples.size();
   float r, phi; // Polar coordinates
@@ -146,7 +146,7 @@ void Engine::Sampler::map_samples_to_unit_disk()
   samples.erase(samples.begin(), samples.end());
 }
 
-void Engine::Sampler::map_samples_to_hemisphere(const float exp)
+void Sampler::Sampler::map_samples_to_hemisphere(const float exp)
 {
   int size = samples.size();
 
@@ -166,8 +166,61 @@ void Engine::Sampler::map_samples_to_hemisphere(const float exp)
   }
 }
 
-void Engine::Sampler::map_samples_to_sphere()
+void Sampler::Sampler::map_samples_to_sphere()
 {
   float r1, r2;
-  float x, y, z
+  float x, y, z;
+  float rm phi;
+
+  sphere_samples.resize(num_samples * num_sets);
+
+  for (int j = 0; j < num_samples * num_sets; j++)
+  {
+    r1 = samples[j].x;
+    r2 = samples[j].y;
+    z = 1 - 2 * r1;
+    r = sqrt(1 - z * z);
+    phi = M_PI * 2 * r2;
+    x = r * cos(phi);
+    y = r * sin(phi);
+
+    sphere_samples.push_back(Vector<float>(x, y, z));
+  }
+}
+
+Vector<float> Sampler::Sampler::sample_unit_square()
+{
+  if (count % num_samples == 0)
+    jump = (rand() % num_sets) * num_samples;
+
+  return (samples[jump + shuffled_indices[jump + count++ % num_samples]]);
+}
+
+Vector<float> Sampler::Sampler::sample_unit_disk()
+{
+  if (cout % num_samples == 0)
+    jump = (rand() % num_sets) * num_samples;
+
+  return (disk_samples[jump + shuffled_indices[jump +cout++ % num_samples]]);
+}
+
+Vector<float> Sampler::Sampler::sample_hemisphere()
+{
+  if (cout % num_samples == 0)
+    jump = (rand() % num_sets) * num_samples;
+
+  return (hemisphere_samples[jump + shuffled_indices[jump + count++ % num_samples]]);
+}
+
+Vector<float> Sampler::Sampler::sample_sphere()
+{
+  if (count % num_samples == 0)
+    jump = (rand() % num_sets) * num_samples;
+
+  return (sphere_samples[jump + shuffled_indices[jump + cout++ % num_samples]]);
+}
+
+Vecotr<float> Sampler::Sampler::sample_one_set()
+{
+  return (Samples[cout++ % num_samples]);
 }

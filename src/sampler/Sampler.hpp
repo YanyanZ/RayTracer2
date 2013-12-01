@@ -8,7 +8,7 @@
 
 using namespace Tools;
 
-namespace Engine
+namespace Sampler
 {
   class Sampler
   {
