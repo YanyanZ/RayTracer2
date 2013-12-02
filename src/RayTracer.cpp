@@ -33,11 +33,11 @@ void RayTracer::build()
       std::string tmp = obj.attribute("center").value();
       std::stringstream ss(tmp);
       std::vector<float> v;
-    
+
       while (ss.good())
       {
 	std::string substr;
-	
+
 	getline(ss, substr, ';');
 	v.push_back(std::stof(substr));
       }
@@ -46,7 +46,7 @@ void RayTracer::build()
       spheres->push_back(Objects::Basic::Sphere(vec, r,	RGBColor<float>(255, 0, 0)));
     }
 
-    type = obj.attribute("type").value(); 
+    type = obj.attribute("type").value();
     if (type.compare("triangle") == 0)
     {
       std::string tmp = obj.attribute("v0").value();
@@ -56,19 +56,19 @@ void RayTracer::build()
       while (ss.good())
       {
 	std::string substr;
-	
+
 	getline(ss, substr, ';');
 	v0.push_back(std::stof(substr));
       }
-      
+
       tmp = obj.attribute("v1").value();
       std::stringstream sss(tmp);
       std::vector<float> v1;
-      
+
       while (sss.good())
       {
 	std::string substr;
-	
+
 	getline(sss, substr, ';');
 	v1.push_back(std::stof(substr));
       }
@@ -80,11 +80,11 @@ void RayTracer::build()
       while (ssss.good())
       {
 	std::string substr;
-	
+
 	getline(ssss, substr, ';');
 	v2.push_back(std::stof(substr));
       }
-      
+
       Vector<float> ve0 = Vector<float>(v0[0], v0[1], v0[2]);
       Vector<float> ve1 = Vector<float>(v1[0], v1[1], v1[2]);
       Vector<float> ve2 = Vector<float>(v2[0], v2[1], v2[2]);
@@ -109,7 +109,7 @@ void RayTracer::build()
 void RayTracer::trace()
 {
   Vector<float> dir(0, 0, -1);
-  Camera cam = Camera();  // Test cam
+  //  Camera cam = Camera();  // Test cam
 
   im.resize(width);
 

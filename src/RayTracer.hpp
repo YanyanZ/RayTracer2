@@ -10,7 +10,7 @@
 # include <engine/objects/basic/Sphere.hpp>
 # include <engine/objects/basic/Triangle.hpp>
 
-# include <cameras/Camera.hpp>
+//# include <cameras/Camera.hpp>
 
 # include <display/Image.hpp>
 
