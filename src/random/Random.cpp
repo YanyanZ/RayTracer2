@@ -15,5 +15,5 @@ Random::Random(unsigned long long _seed)
 float Random::operator()()
 {
   seed = mult * seed;
-  return (float(seed % llong_max) / float_max);
+  return (static_cast<float>(seed % llong_max) / float_max);
 }

@@ -109,6 +109,7 @@ void RayTracer::build()
 void RayTracer::trace()
 {
   Vector<float> dir(0, 0, -1);
+  Camera cam = Camera();  // Test cam
 
   im.resize(width);
 
@@ -121,15 +122,16 @@ void RayTracer::trace()
       float tmax = 1000000.0f;
       Engine::Ray r(Vector<float>(i, j, 0), dir);
 
-
       for (unsigned int n = 0; n < triangles->size(); n++)
       {
+	// Replace r by getRay() to get the new ray
 	if ((*triangles)[n].hit(r, 0.00001f, tmax, 0, rec) == true)
 	  im[i][j] = rec.color;
       }
 
       for (unsigned int n = 0; n < spheres->size(); n++)
       {
+	// Replace r by getRay() to get the new ray
 	if ((*spheres)[n].hit(r, 0.00001f, tmax, 0, rec) == true)
 	  im[i][j] = rec.color;
       }

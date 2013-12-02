@@ -9,6 +9,9 @@
 # include <engine/objects/Shape.hpp>
 # include <engine/objects/basic/Sphere.hpp>
 # include <engine/objects/basic/Triangle.hpp>
+
+# include <cameras/Camera.hpp>
+
 # include <display/Image.hpp>
 
 # include <parser/xml/src/pugixml.hpp>
