@@ -16,7 +16,8 @@ public:
   virtual ~Light();
 
 public:
-  Light(RGBColor<float> c, Vector<float> dir);
+  Light(RGBColor<float> co);
+  Light(RGBColor<float> co, Vector<float> dirr);
 };
 
 #endif
