@@ -1,6 +1,12 @@
 #ifndef CAMERA_HPP__
 # define CAMERA_HPP__
 
+# include <tools/ONB.hpp>
+# include <tools/Vector.hpp>
+# include <tools/Ray.hpp>
+
+using namespace Tools;
+
 class Camera
 {
 public:
@@ -15,7 +21,7 @@ public:
 
 public:
   Camera();
-  Camera(const&Camera orig);
+  Camera(const Camera& orig);
   Camera(Vector<float> c, Vector<float> gaze, Vector<float> vup, float aperture,
 	 float left, float right, float bottom, float top, float distance);
  

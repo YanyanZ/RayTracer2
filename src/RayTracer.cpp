@@ -109,9 +109,14 @@ void RayTracer::build()
 void RayTracer::trace()
 {
   Vector<float> dir(0, 0, -1);
-  int n = 2; // Number of sample
-  //  Camera cam = Camera();  // Test cam
-
+  Camera cam = Camera(Vector<float>(0, 0, 2),
+		      Vector<float>(0, 0, -2),
+		      Vector<float>(0, 1, 0),
+		      1,
+		      -2, -2,
+		      2, 2,
+		      2);  // Test cam marche pas
+  
   im.resize(width);
 
   for (int i = 0; i < width; i++)
@@ -121,21 +126,43 @@ void RayTracer::trace()
     {
       Objects::HitRecord rec;
       float tmax = 1000000.0f;
-      Engine::Ray r(Vector<float>(i, j, 0), dir);
+      Tools::Ray r(Vector<float>(i, j, 0), dir);
 
       for (unsigned int n = 0; n < triangles->size(); n++)
       {
+	//Tools::Ray tmp = cam.getRay(i, j, 1, 1);
 	if ((*triangles)[n].hit(r, 0.00001f, tmax, 0, rec) == true)
 	  im[i][j] = rec.color;
       }
 
       for (unsigned int n = 0; n < spheres->size(); n++)
       {
+	//Tools::Ray tmp = cam.getRay(i, j, 0.01, 0.01);
 	if ((*spheres)[n].hit(r, 0.00001f, tmax, 0, rec) == true)
 	  im[i][j] = rec.color;
       }
     }
   }
+
+  // Antialiasing
+  for (int n = 0; n < 3; n++)
+    for (int i = 1; i < width - 1; i++)
+      for (int j = 1; j < heigh - 1; j++)
+      {
+	im[i][j] = im[i][j] + 
+	  im[i + 1][j + 1] +
+	  im[i - 1][j - 1] +
+	  im[i + 1][j - 1] +
+	  im[i - 1][j + 1] +
+	  im[i + 1][j] +
+	  im[i - 1][j] +
+	  im[i][j - 1] +
+	  im[i][j + 1];
+	
+	im[i][j].r = im[i][j].r / 9;
+	im[i][j].g = im[i][j].g / 9;
+	im[i][j].b = im[i][j].b / 9;
+      }
 }
 
 void RayTracer::save()

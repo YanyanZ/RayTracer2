@@ -7,7 +7,7 @@
 
 using namespace Tools;
 
-namespace Engine
+namespace Tools
 {
   class Ray
   {

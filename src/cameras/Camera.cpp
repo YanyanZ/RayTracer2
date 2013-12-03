@@ -23,22 +23,23 @@ Camera::Camera(const Camera& orig)
   lens_radius = orig.lens_radius;
 }
 
-Camera::Camera(Vector<float> c, Vector<float> gaze, Vector<float> vup, float aperture,
-       float left, float right, float bottom, float top, float distance)
-  : center (c), d (distance), u0 (left), u1 (right), v0 (bottom), v1 (top)
+Camera::Camera(Vector<float> c, Vector<float> gaze, Vector<float> vup,
+	       float aperture, float left, float right, float bottom,
+	       float top, float distance)
+  : center (c), u0 (left), u1 (right), v0 (bottom), v1 (top), d (distance)
 {
   lens_radius = aperture / 2.0;
   uvw.initFromWV(-gaze, vup);
-  corner = center + u0 * uvw.u() + v0 * uvw.v() - d * uvw.w();
-  across = (u0 - u1) * uvw.v();
+  corner = center + u0 * uvw.u + v0 * uvw.v - d * uvw.w;
+  across = (u0 - u1) * uvw.v;
 }
 
-Ray getRay(float a, float b, float xi1, float xi2)
+Ray Camera::getRay(float a, float b, float xi1, float xi2)
 {
-  Vector<float> origin = center + 2.0 * (xi1 - 0.5) * lens_radius * uvw.u() +
-    2.0 * (xi2 - 0.5) * lens_radius * uvw.v();
+  Vector<float> origin = center + uvw.u * 2.0 * (xi1 - 0.5) * lens_radius+
+    uvw.v * 2.0 * (xi2 - 0.5) * lens_radius;
 
   Vector<float> target = corner + across * a + up * b;
 
-  return Ray(origin, unitVector(target - orgin));
+  return Ray(origin, Tools::Vector<float>::unitVector(target - origin));
 }

@@ -1,12 +1,11 @@
 #ifndef SHAPE_HPP
 # define SHAPE_HPP
 
-# include <engine/Ray.hpp>
+# include <tools/Ray.hpp>
 # include <tools/Color.hpp>
 # include <tools/Vector.hpp>
 
 using namespace Tools;
-using namespace Engine;
 
 namespace Objects
 {

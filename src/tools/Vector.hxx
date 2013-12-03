@@ -50,6 +50,12 @@ Vector<T> Tools::Vector<T>::operator-(const Vector& v)
 }
 
 template <typename T>
+Vector<T> Tools::Vector<T>::operator-() const
+{
+  return (Vector<T>(-x, -y, -z));
+}
+
+template <typename T>
 Vector<T> Tools::Vector<T>::operator*(const Vector& v)
 {
   return (Vector<T>(v.x * x, v.y * y, v.z * z));

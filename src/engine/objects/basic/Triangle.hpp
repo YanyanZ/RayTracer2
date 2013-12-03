@@ -3,7 +3,7 @@
 
 # include <tools/Vector.hpp>
 # include <tools/Color.hpp>
-# include <engine/Ray.hpp>
+# include <tools/Ray.hpp>
 # include <engine/objects/Shape.hpp>
 
 using namespace Tools;
