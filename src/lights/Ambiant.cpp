@@ -1,10 +1,10 @@
-# include <lights/Light.hpp>
+# include <lights/Ambiant.hpp>
 
-Light::Ambiant::~Ambiant()
+Lights::Ambiant::~Ambiant()
 {
 }
 
-Light::Ambiant::Ambiant(const RGBColor<float> c)
+Lights::Ambiant::Ambiant(const RGBColor<float> c)
   : Light(c)
 {
 }

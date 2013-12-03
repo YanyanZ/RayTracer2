@@ -8,7 +8,7 @@
 
 using namespace Tools;
 
-namespace Light
+namespace Lights
 {
   class Ambiant : public Light
   {

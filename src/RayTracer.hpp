@@ -20,6 +20,8 @@
 
 // Lights libs
 
+# include <lights/Directional.hpp>
+
 // Dispkay libs
 
 # include <display/Image.hpp>
@@ -44,6 +46,7 @@ private:
   int heigh;
   std::vector<Objects::Basic::Sphere>* spheres;
   std::vector<Objects::Basic::Triangle>* triangles;
+  std::vector<Light>* lights;
 
 public:
   ~RayTracer();

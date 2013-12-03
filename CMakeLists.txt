@@ -23,6 +23,7 @@ target_link_libraries(${PRG_NAME} ${OpenCV_LIBRARIES})
 
 target_link_libraries(${PRG_NAME} RayTracer)
 target_link_libraries(${PRG_NAME} Tools)
+target_link_libraries(${PRG_NAME} Lights)
 target_link_libraries(${PRG_NAME} Cameras)
 target_link_libraries(${PRG_NAME} Display)
 target_link_libraries(${PRG_NAME} Engine)

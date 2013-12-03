@@ -4,6 +4,10 @@ RayTracer::~RayTracer()
 {
   if (spheres)
     delete spheres;
+  if (triangles)
+    delete triangles;
+  if (lights)
+    delete lights;
 }
 
 RayTracer::RayTracer(std::string _in, std::string _out)
@@ -18,6 +22,7 @@ void RayTracer::build()
 
   spheres = new std::vector<Objects::Basic::Sphere>();
   triangles = new std::vector<Objects::Basic::Triangle>();
+  lights = new std::vector<Light>();
 
   width = doc.child("scene").attribute("x").as_int();
   heigh = doc.child("scene").attribute("y").as_int();
@@ -94,6 +99,50 @@ void RayTracer::build()
     }
   }
 
+  first = doc.child("scene").child("lights");
+  for (pugi::xml_node obj = first.child("light"); obj; obj = obj.next_sibling("light"))
+  {
+    std::string tmp = obj.attribute("dir").value();
+    std::stringstream ssss(tmp);
+    std::vector<float> v;
+
+    while (ssss.good())
+    {
+      std::string substr;
+
+      getline(ssss, substr, ';');
+      v.push_back(std::stof(substr));
+    }
+
+    Vector<float> dir = Vector<float>(v[0], v[1], v[2]);
+
+
+    tmp = obj.attribute("origin").value();
+    std::stringstream sssss(tmp);
+    std::vector<float> orig;
+
+    while (sssss.good())
+    {
+      std::string substr;
+
+      getline(sssss, substr, ';');
+      std::cout << substr << std::endl;
+
+      orig.push_back(std::stof(substr));
+    }
+
+    Vector<float> o = Vector<float>(orig[0], orig[1], orig[2]);
+
+    Light l = Light(RGBColor<float>(0,0,0), dir, o);
+
+    lights->push_back(l);
+  }
+
+  for (unsigned int i = 0; i < lights->size(); i++)
+  {
+    std::cout << "[LIGHTS]" << std::endl;
+  }
+
   for (unsigned int i = 0; i < spheres->size(); i++)
   {
     std::cout << "[SPHERE] " << (*spheres)[i].center << std::endl;
@@ -142,6 +191,40 @@ void RayTracer::trace()
 	  im[i][j] = rec.color;
       }
     }
+  }
+
+  // Lights IN DEBUG
+  for (unsigned int i = 0; i < lights->size(); i++)
+  {
+      Objects::HitRecord rec;
+      float tmax = 1000000.0f;
+      Tools::Ray r((*lights)[i].origin, (*lights)[i].dir);
+      int x = (*lights)[i].origin.x;
+      int y = (*lights)[i].origin.y;
+      int radius = 100;
+
+      for (int a = 0; a <= radius; a++)
+	for (int b = 0; b <= radius; b++)
+	{
+	  for (unsigned int n = 0; n < triangles->size(); n++)
+	  {
+	    //Tools::Ray tmp = cam.getRay(i, j, 1, 1);
+	    if ((*triangles)[n].hit(r, 0.00001f, tmax, 0, rec) == true)
+	    {
+	      //im[a + x][b + y] = RGBColor<float>(255, 255, 255);
+	    }
+	  }
+	  
+	  for (unsigned int n = 0; n < spheres->size(); n++)
+	  {
+	    //Tools::Ray tmp = cam.getRay(i, j, 0.01, 0.01);
+	    if ((*spheres)[n].hit(r, 0.00001f, tmax, 0, rec) == true)
+	    {
+	      std::cout << rec.t << std::endl;
+	      //im[a + x][b + y] = RGBColor<float>(255, 255, 255);
+	    }
+	  }	  
+	}
   }
 
   // Antialiasing
