@@ -253,3 +253,14 @@ float Sampler::rand_float()
 {
   return (static_cast<float>(rand() * (1 / RAND_MAX)));
 }
+
+std::string Sampler::print()
+{
+  std::stringstream ss;
+
+  ss << "[SAMPLER] Type = Jittered - ";
+  ss << "Number Samples = ";
+  ss << num_samples;
+
+  return ss.str();
+}

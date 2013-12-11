@@ -70,9 +70,9 @@ std::string Objects::Basic::Sphere::print()
   std::stringstream out;
 
   out << "[SPHERE] ";
-  out << "Center={" << center.x << ";" << center.y << ";" << center.z << "} ";
-  out << "Radius=" << radius;
-  out << " Color={" << color.r << ";" << color.g << ";" << color.b << "}";
+  out << "Center={" << center.x << ";" << center.y << ";" << center.z << "} - ";
+  out << "Radius=" << radius << " - ";
+  out << "Color={" << color.r << ";" << color.g << ";" << color.b << "}";
 
   return out.str();
 }

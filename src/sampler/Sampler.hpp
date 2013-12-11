@@ -5,6 +5,7 @@
 # include <vector>
 # include <cmath>
 # include <iostream>
+# include <sstream>
 
 # include <tools/Vector.hpp>
 
@@ -60,6 +61,9 @@ public:
 
 public:
   float rand_float();
+
+public:
+  std::string print();
 };
 
 #endif

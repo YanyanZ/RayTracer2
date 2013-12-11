@@ -24,6 +24,13 @@ void RayTracer::build()
   width = doc.child("scene").attribute("x").as_int();
   heigh = doc.child("scene").attribute("y").as_int();
 
+  std::string name_sampler = doc.child("sampler").attribute("type").value();
+  nb_samples = doc.child("sampler").attribute("nb_samples").as_int();
+  std::cout << name_sampler << std::endl;
+
+  if (name_sampler.compare("Jittered") == 0)
+    sampler = new Jittered(nb_samples);
+
   pugi::xml_node first = doc.child("scene").child("objects");
   for (pugi::xml_node obj = first.child("object"); obj; obj = obj.next_sibling("object"))
   {
@@ -147,6 +154,9 @@ void RayTracer::build()
 
   //for (unsigned int i = 0; i < lights->size(); i++)
   //  std::cout << (*lights)[i] << std::endl;
+
+  //if (sampler != NULL)
+  //  std::cout << sampler->print() << std::endl;
 
   for (unsigned int i = 0; i < objects->size(); i++)
     std::cout << (*objects)[i]->print() << std::endl;

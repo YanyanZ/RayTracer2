@@ -45,6 +45,7 @@ private:
   int heigh;
 
 private:
+  int nb_samples;
   Sampler* sampler;
 
 private:
