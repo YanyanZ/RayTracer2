@@ -107,8 +107,11 @@ bool Objects::Basic::Triangle::shadowHit(const Ray& r, float tmin, float tmax, f
   return (tval >= tmin && tval <= tmax);
 }
 
-std::ostream& Objects::Basic::Triangle::operator<<(std::ostream& out)
+std::string Objects::Basic::Triangle::print()
 {
-  out << "[TRIANGLE]" << std::endl;
+  std::string out;
+
+  out += "[TRIANGLE]";
+
   return out;
 }

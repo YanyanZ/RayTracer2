@@ -65,13 +65,14 @@ bool Objects::Basic::Sphere::shadowHit(const Ray& r, float tmin, float tmax, flo
   return false;
 }
 
-std::ostream& Objects::Basic::Sphere::operator<<(std::ostream& out)
+std::string Objects::Basic::Sphere::print()
 {
+  std::stringstream out;
+
   out << "[SPHERE] ";
   out << "Center={" << center.x << ";" << center.y << ";" << center.z << "} ";
   out << "Radius=" << radius;
-  out << "Color={" << color.r << ";" << color.g << ";" << color.b << "}";
-  out << std::endl;
+  out << " Color={" << color.r << ";" << color.g << ";" << color.b << "}";
 
-  return out;
+  return out.str();
 }

@@ -31,7 +31,6 @@
 # include <parser/xml/src/pugixml.hpp>
 
 // Class
-
 class RayTracer
 {
 private:
@@ -44,6 +43,9 @@ private:
 private:
   int width;
   int heigh;
+
+private:
+  Sampler* sampler;
 
 private:
   std::vector<Objects::Shape*>* objects;

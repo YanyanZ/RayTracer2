@@ -148,8 +148,8 @@ void RayTracer::build()
   //for (unsigned int i = 0; i < lights->size(); i++)
   //  std::cout << (*lights)[i] << std::endl;
 
-  //for (unsigned int i = 0; i < objects->size(); i++)
-  //  std::cout << (*objects)[i] << std::endl;
+  for (unsigned int i = 0; i < objects->size(); i++)
+    std::cout << (*objects)[i]->print() << std::endl;
 }
 
 void RayTracer::trace()

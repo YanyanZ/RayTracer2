@@ -2,6 +2,7 @@
 # define SHAPE_HPP
 
 # include <iostream>
+# include <sstream>
 
 # include <tools/Ray.hpp>
 # include <tools/Color.hpp>
@@ -39,7 +40,7 @@ namespace Objects
     virtual bool shadowHit(const Ray& r, float tmin, float tmax, float time);
 
   public:
-    virtual std::ostream& operator<<(std::ostream& out);
+    virtual std::string print();
   };
 }
 

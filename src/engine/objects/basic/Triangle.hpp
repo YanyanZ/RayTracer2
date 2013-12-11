@@ -33,7 +33,7 @@ namespace Objects
       bool shadowHit(const Ray& r, float tmin, float tmax, float time);
 
     public:
-      std::ostream& operator<<(std::ostream& out); 
+      std::string print(); 
     };
   }
 }
