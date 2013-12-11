@@ -1,6 +1,11 @@
 #ifndef SAMPLER_HPP__
 # define SAMPLER_HPP__
 
+# include <algorithm>
+# include <vector>
+# include <cmath>
+# include <iostream>
+
 # include <tools/Vector.hpp>
 
 using namespace Tools;
@@ -27,7 +32,7 @@ public:
   Sampler();
   Sampler(const int nb);
   Sampler(const int nb, const int nb_sets);
-  Sampler(const Sampler s);
+  Sampler(const Sampler& s);
 
 public:
   Sampler& operator=(const Sampler& s);
@@ -35,14 +40,14 @@ public:
   const int get_nb_samples() const;
 
 public:
-  virtual Sampler* clone() const = 0;
-  virtual void generate_sample(void) = 0;
+  virtual Sampler* clone() const{return nullptr;};
+  virtual void generate_sample(void){};
 
 public:
-  void setup_shuffle_indices();
+  void setup_shuffled_indices();
   void shuffle_x();
   void shuffle_y();
-  void map_samples_to_unut_disk();
+  void map_samples_to_unit_disk();
   void map_samples_to_hemisphere(const float p);
   void map_samples_to_sphere();
 
@@ -52,6 +57,9 @@ public:
   Vector<float> sample_hemisphere();
   Vector<float> sample_sphere();
   Vector<float> sample_one_set();
+
+public:
+  float rand_float();
 };
 
 #endif

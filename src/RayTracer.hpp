@@ -14,20 +14,20 @@
 # include <engine/objects/basic/Sphere.hpp>
 # include <engine/objects/basic/Triangle.hpp>
 
-// Cameras libs
+// Sampler libs
+# include <sampler/Sampler.hpp>
+# include <sampler/Jitter.hpp>
 
+// Cameras libs
 # include <cameras/Camera.hpp>
 
 // Lights libs
-
 # include <lights/Directional.hpp>
 
-// Dispkay libs
-
+// Display libs
 # include <display/Image.hpp>
 
 // Parser XML & OBJ
-
 # include <parser/xml/src/pugixml.hpp>
 
 // Class
