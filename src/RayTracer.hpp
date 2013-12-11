@@ -44,8 +44,9 @@ private:
 private:
   int width;
   int heigh;
-  std::vector<Objects::Basic::Sphere>* spheres;
-  std::vector<Objects::Basic::Triangle>* triangles;
+
+private:
+  std::vector<Objects::Shape*>* objects;
   std::vector<Light>* lights;
 
 public:

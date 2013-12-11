@@ -5,7 +5,7 @@ Objects::Basic::Sphere::~Sphere()
 }
 
 Objects::Basic::Sphere::Sphere(const Vector<float> o, float r, const RGBColor<float> c)
-  : center (o), radius (r), color (c)
+  : Shape(c), center (o), radius (r)
 {
 }
 
@@ -63,4 +63,15 @@ bool Objects::Basic::Sphere::shadowHit(const Ray& r, float tmin, float tmax, flo
   }
 
   return false;
+}
+
+std::ostream& Objects::Basic::Sphere::operator<<(std::ostream& out)
+{
+  out << "[SPHERE] ";
+  out << "Center={" << center.x << ";" << center.y << ";" << center.z << "} ";
+  out << "Radius=" << radius;
+  out << "Color={" << color.r << ";" << color.g << ";" << color.b << "}";
+  out << std::endl;
+
+  return out;
 }

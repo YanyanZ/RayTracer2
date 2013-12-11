@@ -8,7 +8,7 @@ Objects::Basic::Triangle::Triangle(const Vector<float> _s0,
 				   const Vector<float> _s1,
 				   const Vector<float> _s2,
 				   const RGBColor<float> rgb)
-  : s0 (_s0), s1 (_s1), s2 (_s2), color (rgb)
+  : Shape(rgb), s0 (_s0), s1 (_s1), s2 (_s2)
 {
 }
 
@@ -105,4 +105,10 @@ bool Objects::Basic::Triangle::shadowHit(const Ray& r, float tmin, float tmax, f
   tval = -(F * AKJB + E * JCAL + D * BLKC) / denom;
 
   return (tval >= tmin && tval <= tmax);
+}
+
+std::ostream& Objects::Basic::Triangle::operator<<(std::ostream& out)
+{
+  out << "[TRIANGLE]" << std::endl;
+  return out;
 }

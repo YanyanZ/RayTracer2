@@ -19,16 +19,18 @@ namespace Objects
     public:
       Vector<float> center;
       float radius;
-      RGBColor<float> color;
 
     public:
-      ~Sphere();
+      virtual ~Sphere();
       Sphere(const Vector<float> o, float r, const RGBColor<float> c);
 
     public:
-      virtual bool hit(const Ray& r, float tmin, float tmax, float time,
+      bool hit(const Ray& r, float tmin, float tmax, float time,
 		       HitRecord& hr);
-      virtual bool shadowHit(const Ray& r, float tmin, float tmax, float time);
+      bool shadowHit(const Ray& r, float tmin, float tmax, float time);
+
+    public:
+      std::ostream& operator<<(std::ostream& out);
     };
   }
 }
