@@ -165,8 +165,8 @@ void RayTracer::build()
 void RayTracer::trace()
 {
   Vector<float> dir(0, 0, -1);
-  int n = static_cast<int>(sqrt(1));
-  float psize = 0.5;
+  int n = static_cast<int>(sqrt(2));
+  float psize = 1;
 
   im.resize(width);
 
@@ -194,7 +194,7 @@ void RayTracer::trace()
       im[i][j].g = im[i][j].g / 1;
       im[i][j].b = im[i][j].b / 1;
 
-      im[i][j] = im[i][j] * static_cast<float>(1);
+      im[i][j] = im[i][j] * 1.0;
     }
   }
 }

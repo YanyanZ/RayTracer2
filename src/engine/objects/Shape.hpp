@@ -32,15 +32,15 @@ namespace Objects
 
   public:
     Shape(RGBColor<float> c);
-    virtual ~Shape(){};
+    virtual ~Shape();
 
   public:
     virtual bool hit(const Ray& r, float tmin, float tmax, float time,
-		     HitRecord& hr);
-    virtual bool shadowHit(const Ray& r, float tmin, float tmax, float time);
+		     HitRecord& hr) = 0;
+    virtual bool shadowHit(const Ray& r, float tmin, float tmax, float time) = 0;
 
   public:
-    virtual std::string print();
+    virtual std::string print() = 0;
   };
 }
 
