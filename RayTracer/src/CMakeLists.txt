@@ -1,0 +1,6 @@
+add_subdirectory(tools)
+add_subdirectory(light)
+add_subdirectory(object)
+add_subdirectory(perlin)
+add_subdirectory(scene)
+add_subdirectory(texture)

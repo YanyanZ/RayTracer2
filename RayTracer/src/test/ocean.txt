@@ -1,0 +1,70 @@
+##################################################
+# global setting                                 #
+##################################################
+
+global_setting {
+	max_trace_level 3
+	output_width 1024
+	output_height 768
+	#antialiasing 10
+	#aa_threshold 0.2
+}
+
+##################################################
+# background                                     #
+##################################################
+
+background{
+	color <0.2,0.2,0.8>
+}
+
+##################################################
+# light_source                                   #
+##################################################
+
+light_source {
+	location <3,-5,0>
+	color <1.0,1.0,1.0>
+}
+
+light_source {
+	location <2,1,0>
+	color <1.0,1.0,1.0>
+}
+
+light_source {
+	AMBIENT
+	color <1,1,1>
+}
+
+##################################################
+# camera                                         #
+##################################################
+
+camera{
+	location <0.2,0,-0.1>
+	look_at  <0,0,1>
+	field_of_view 130
+}
+
+##################################################
+# la sphere premier plan                         #
+##################################################
+
+sphere{
+	2.5
+	finish {
+		ambient 0.3
+		diffuse 0.3
+		specular 0.9
+		shininess 50
+		reflection 0.5
+
+	}
+	transform {
+		translate <-1,0,4>
+	}
+	pigment{
+		color <1.0,0.0,0.0>
+	}
+}
