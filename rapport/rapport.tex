@@ -1,0 +1,92 @@
+\documentclass[fontsize=10pt, twoside=no]{scrartcl} % KOMA class
+
+% other packages %
+\usepackage{graphicx}
+\usepackage{titlesec}
+%\usepackage{url}
+\usepackage{fancybox}
+
+% lang : french %
+\usepackage[utf8]{inputenc}
+\usepackage{xspace}
+\usepackage[T1]{fontenc}
+\usepackage[english,frenchb]{babel}
+
+% mise en page %
+\KOMAoptions{parskip=half+}
+\KOMAoptions{paper=a4,DIV=22}
+
+\addto\captionsfrench{\def\partname{}}
+\renewcommand{\thepart}{}
+%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+\pagestyle{headings}
+
+%\begin{minipage}[c]{\textwidth}
+%  \begin{center}
+%    \includegraphics [height=60mm]{logo.png} \\[0.5cm]
+%  \end{center}
+%\end{minipage}
+
+\begin{center}
+
+\thispagestyle{empty}
+
+\vspace*{5\baselineskip}
+
+\textsc{\Large Synthèse d'images}\\[0.2cm]
+janvier 2014\\[0.5cm]
+
+\vspace*{2\baselineskip}
+
+\begin{minipage}[t]{.8\textwidth}
+  \begin{flushleft} \large
+    %\emph{Auteurs :}
+    Victor \textsc{Degliame} -
+    Florian \textsc{Thomassin}
+  \end{flushleft}
+\end{minipage}
+
+\vspace*{5\baselineskip}
+
+\begin{minipage}[t]{0.8\textwidth}
+  \noindent
+  \emph{Sujet :}\\
+  Création d'un Ray Tracer 100\% à la main. Seuls les dépendances pour les I/O sont autorisées. Doit obligatoirement
+  gérer les lumières ambiantes, un nombre arbitraire de lumières omnidirectionnelles non ponctuelles, gérer le diffus et
+  le spéculaire, des textures monochromes pour chaque objet et des surfaces définies par des triangles avec ou sans
+  lissage.
+\end{minipage}
+
+
+\end{center}
+
+\end{titlepage}
+
+
+\title{Ray Tracer}
+\author{Victor \textsc{Degliame} - Florian \textsc{Thomassin}}
+%\maketitle
+
+\part{Les lumières}
+
+    \section{Lumière ambiante}
+    
+    \section{Lumières omnidirectionnelles non ponctuelles}
+
+    \section{Le diffus}
+
+    \section{Le Spéculaire}
+
+\part{Les Textures}
+
+    \section{monochrome}
+
+\part{Représentation des objets}
+
+    \section{Surface définie par triangles}
+    
+\end{document}
