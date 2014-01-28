@@ -30,7 +30,7 @@ namespace Tools
   public:
     bool operator==(const Ray& r);
     bool operator!=(const Ray& r);
-    
+
   public:
     std::ostream& operator<<(std::ostream& flux);
   };

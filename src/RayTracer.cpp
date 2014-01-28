@@ -166,7 +166,9 @@ void RayTracer::trace()
 {
   Vector<float> dir(0, 0, -1);
   int n = static_cast<int>(sqrt(2));
-  float psize = 1;
+  //float psize = 1;
+  Camera cam({0.2, 0, -0.1}, {0, 0, -1}, {0, 1, 0},
+	     101, -2, 2, -2, 2, 2);
 
   im.resize(width);
 
@@ -180,9 +182,10 @@ void RayTracer::trace()
 	{
 	  Objects::HitRecord rec;
 	  float tmax = 1000000.0f;
-	  Tools::Ray r(Vector<float>(psize * (i - 0.5 * width + (p + 0.5) / n),
-				     psize * (j - 0.5 * heigh + (q + 0.5) / n), 0), dir);
-
+	  //Tools::Ray r(Vector<float>(psize * (i - 0.5 * width + (p + 0.5) / n),
+	  //			     psize * (j - 0.5 * heigh + (q + 0.5) / n), 0), dir);
+	  Tools::Ray r = cam.getRay(i, j, 0.1, 0.1);
+	  //std::cout << r.origin() << " " << r.direction() << std::endl;
 	  for (unsigned int n = 0; n < objects->size(); n++)
 	  {
 	    if ((*objects)[n]->hit(r, 0.00001f, tmax, 0, rec) == true)
