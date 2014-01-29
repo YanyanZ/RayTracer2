@@ -16,7 +16,6 @@
 # include <object/Object.hpp>
 # include <scene/Camera.hpp>
 # include <light/Light.hpp>
-# include <scene/Background.hpp>
 # include <scene/Scene.hpp>
 
 # include <tools/Ray.hpp>
@@ -112,7 +111,7 @@ namespace Engine
      */
     void throwRays(int i, int j, double coul[3]);
 
-  public
+  public:
     /*!
      * \brief Détermine si un rayon à toucher un objet
      * \param r : rayon

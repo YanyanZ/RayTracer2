@@ -13,7 +13,6 @@
 
 # include <object/Object.hpp>
 # include <scene/Camera.hpp>
-# include <scene/Background.hpp>
 
 # include <light/Ambiant.hpp>
 # include <light/Point.hpp>
