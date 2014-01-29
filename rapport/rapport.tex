@@ -74,19 +74,66 @@ janvier 2014\\[0.5cm]
 \part{Les lumières}
 
     \section{Lumière ambiante}
-    
+
+C'est une lumière qui est reçue de façon uniforme par tous les points de la scène. Elle ne prend pas en compte la
+position des autres sources lumineuses et des réflections sur les objets de la scène. Elle permet d'éviter que certaines
+zones soient complètement noires et donne un effet plus réaliste à la scène car il est rare qu'un objet ne recoivent pas
+du tout de lumière étant donné que tous les objets réfléchissent un peu de lumière.
+
     \section{Lumières omnidirectionnelles non ponctuelles}
+
+C'est une source de lumière placée dans un point de l'espace et qui forme une "boule" qui éclaire dans toutes les
+directions de façon uniforme. Si un rayon intersecte cette boule alors on considère que le point d'où provient le rayon
+est éclairé par cette source de lumière. Une telle source a une influence diffuse et spéculaire sur les objets qu'elle
+éclaire.
 
     \section{Le diffus}
 
+Cela représente la lumière qui s'étale sur la surface d'un objet. Plus le rayon lumineux est perpendiculaire à la
+tangente à l'objet au point d'impact, plus l'énergie du faisceau lumineux réstituée est importante. Ainsi si un rayon
+lumineux arrive sur un objet de pleine face, l'énergie restituée sera grande tandis que si le rayon arrive de façon
+tangentielle à l'objet, l'energie restituée sera très faible. La formule permettant de calculer la couleur du rayon
+diffusé est la suivante :
+
+$$C_{r} \mathrel{+}= \rho _{d} \times C_{l} \times \vec{L} \cdot \vec{N}$$
+
+Avec $C_{r}$ la couleur actuelle du rayon de la caméra. $\rho _{d}$ le taux de diffusion spécifique à chaque objet qui détermine à quel
+point la capacité d'un objet à diffuser la lumière est importante. $C_{l}$ la couleur de la lumière. $\vec{L}$ le rayon
+d'incidence de la lumière. $\vec{N}$ la normale à l'objet au point d'impact.
+ 
+
     \section{Le Spéculaire}
+
+La lumière spéculaire quand à elle correspond à la réflexion des rayons lumineux sur un objet réfléchissant. Plus l'oeil
+sera en face d'un rayon réfléchi sur un objet, plus l'énergie reçue sera importante. A condition que le taux de
+réfléxivité $\rho_{r}$ de l'objet soit assez élevé, bien entendu. La formule de calcul de la couleur du rayon de la caméra
+pour le spéculaire est donc :
+
+$$C_{r} \mathrel{+}= \rho _{r} \times C_{l} \times \vec{LRefl} \cdot \vec{R}$$
+
+Avec $C_{r}$ la couleur actuelle du rayon de la caméra. $\rho_{r}$ le taux de réfléxivité de l'objet. $C_{l}$ la couleur
+de la lumière. $\vec{LRefl}$ le rayon réfléchi de la lumière sur l'objet. $\vec{R}$ le rayon de la caméra.
 
 \part{Les Textures}
 
     \section{monochrome}
 
+La texture de tous les triangles est monochrome (en RGB). Ainsi un rayon de la caméra touchant un objet se vera
+attribuer la couleur de l'objet. A cela viendra s'ajouter les couleurs provenant des différentes lumières.
+
 \part{Représentation des objets}
 
     \section{Surface définie par triangles}
+
+Toutes les surfaces sont définies par des triangles car ils sont très facile à manipuler. Ces triangles sont définis par
+les coordonnées de leurs trois sommets ainsi que de leur normale qui permet de connaitre leur orientation. Cette normale
+va notamment être utilisée pour les calculs de diffusion et de réflexion de la lumière ainsi que pour les effets de
+lissage telles Phong ou Gouraud.
+
+Le principe de ces techniques de lissage est assez simple, lorsque dans une de nos formules on utilise la normale à
+l'objet impacté par le rayon, à la place, on va prendre une moyenne pondérée de la normale de cet objet et de celles de
+ses voisins. Plus le point d'impact est proche d'un triangle, plus sa normale aura d'influence. Ainsi on obtient un
+effet lissé beaucoup plus réaliste et il faut moins de polygones pour avoir un rendu correct.
     
+\part{Bonus}
 \end{document}
