@@ -2,10 +2,10 @@
 
 using namespace Lightning;
 
-Point::Point(std::vector<double> pos, std::vector<double> c)
+Point::Point(double* pos, double* c)
   : Light(c), c1 (1), c2 (0), c3 (0)
 {
-  position = pos;
+  memcpy(position, pos, 4 * sizeof(double));
 
   for(int i = 0; i < 4; i++)
     position[i] /= position[3];
@@ -15,8 +15,9 @@ Point::~Point(void)
 {
 }
 
-void Point::getPosition(std::vector<double> pos)
+void Point::getPosition(double* pos)
 {
+  memcpy(pos, position, 4 * sizeof(double));
   pos = position;
 }
 
@@ -43,14 +44,14 @@ const double Point::getC3 (void)
 }
 
 void Point::getShiness(Ray* r,
-		       std::vector<double> p,
-		       std::vector<double> n,
+		       double p[4],
+		       double n[4],
 		       Object* o,
-		       std::vector<double> l)
+		       double l[3])
 {
-  std::vector<double> lp = {0, 0, 0, 0};
-  std::vector<double> reflect = {0, 0, 0, 0};
-  std::vector<double> c = {0, 0, 0};
+  double lp[4];;
+  double reflect[4];
+  double c[3];
   double dist;
   double ps1, ps2;
   float fd;

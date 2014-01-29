@@ -44,12 +44,12 @@ namespace Texture
     Mapper (char nomFichier[]);
     Mapper ();
     virtual ~ Mapper ();
-  void getCouleurTexture (int i, int j, double couleur[3]);
-  void getMapping (double p[4], double coulobj[3]);
-  void setTexturePlan ();
-  void setTextureSphere (double rayon);
-  void setFrequence (int f);
-  void setTransformer(Transformer * trans);
+    void getCouleurTexture (int i, int j, double couleur[3]);
+    void getMapping (double p[4], double coulobj[3]);
+    void setTexturePlan ();
+    void setTextureSphere (double rayon);
+    void setFrequence (int f);
+    void setTransformer(Transformer * trans);
   };
 }
 

@@ -12,19 +12,19 @@ Sphere::~Sphere(void)
 }
 
 double Sphere::hit(Ray* r,
-		   std::vector<double> i)
+		   double i[4])
 {
   double a, b, c;
   double delta;
-  double t1, t2, t;
-  double d;
+  double t1, t2, t = 0;
+  double d = 0;
 
-  std::vector<double> p = {0, 0, 0, 0};
-  std::vector<double> temp = {0, 0, 0, 0};
-  std::vector<double> pos = {0, 0, 0, 0};
-  std::vector<double> dir = {0, 0, 0, 0};
-  std::vector<double> pos2 = {0, 0, 0, 0};
-  std::vector<double> dir2 = {0, 0, 0, 0};
+  double p[4] = {0, 0, 0, 0};
+  double temp[4] = {0, 0, 0, 0};
+  double pos[4] = {0, 0, 0, 0};
+  double dir[4] = {0, 0, 0, 0};
+  double pos2[4] = {0, 0, 0, 0};
+  double dir2[4] = {0, 0, 0, 0};
 
   r->getOrigin(pos);
   r->getDirection(dir);
@@ -66,16 +66,17 @@ double Sphere::hit(Ray* r,
   return d;
 }
 
-void Sphere::normal(std::vector<double> p, Ray* r,
-		    std::vector<double> normal)
+void Sphere::normal(double p[4], Ray* r,
+		    double normal[4])
 {
-  std::vector<double> p2 = {0, 0, 0, 0};
+  double p2[4] = {0, 0, 0, 0};
 
- trans->transformInv(p2, p);
- normal[0] = p2[0] / p2[3];
- normal[1] = p2[1] / p2[3];
- normal[2] = p2[2] / p2[3];
- normal[3] = 0;
+  trans->transformInv(p2, p);
+
+  normal[0] = p2[0] / p2[3];
+  normal[1] = p2[1] / p2[3];
+  normal[2] = p2[2] / p2[3];
+  normal[3] = 0;
 
  checkNormal(normal, p2, r);
 }

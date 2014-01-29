@@ -2,9 +2,11 @@
 
 using namespace Tools;
 
-Ray::Ray (std::vector<double> orig, std::vector<double> dir)
-  : origin (orig), direction (dir), in (false)
+Ray::Ray (double orig[4], double dir[4])
+  : in (false)
 {
+  memcpy(origin, orig, 4 * sizeof(double));
+  memcpy(direction, dir, 4 * sizeof(double));
   normalize(direction);
 }
 
@@ -17,7 +19,7 @@ Ray::~Ray(void)
 {
 }
 
-void Ray::normalize(std::vector<double>& v)
+void Ray::normalize(double v[4])
 {
   double d = 0;
 
@@ -29,25 +31,25 @@ void Ray::normalize(std::vector<double>& v)
     v[i] /= d;
 }
 
-void Ray::setDirection(std::vector<double> dir)
+void Ray::setDirection(double dir[4])
 {
-  direction = dir;
+  memcpy(direction, dir, 4 * sizeof(double));
   normalize(direction);
 }
 
-void Ray::setOrigin(std::vector<double> orig)
+void Ray::setOrigin(double orig[4])
 {
-  origin = orig;
+  memcpy(origin, orig, 4 * sizeof(double));
 }
 
-void Ray::getDirection(std::vector<double>& dir)
+void Ray::getDirection(double dir[4])
 {
-  dir = direction;
+  memcpy(dir, direction, 4 * sizeof(double));
 }
 
-void Ray::getOrigin(std::vector<double>& orig)
+void Ray::getOrigin(double orig[4])
 {
-  origin = orig;
+  memcpy(orig, origin, 4 * sizeof(double));
 }
 
 void Ray::setIn(bool i)
@@ -65,7 +67,7 @@ bool Ray::isIn(void)
   return in;
 }
 
-double Ray::dot(std::vector<double> vec)
+double Ray::dot(double vec[4])
 {
   double ps = 0;
 

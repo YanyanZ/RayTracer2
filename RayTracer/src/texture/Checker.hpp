@@ -1,10 +1,10 @@
 #ifndef CHECKER_HPP
 # define CHECKER_HPP
 
-# include <stdlib.h>
+# include <cstring>
+# include <cstdlib>
 # include <iostream>
 # include <cmath>
-# include <vector>
 
 # include <tools/Transformer.hpp>
 
@@ -16,8 +16,8 @@ namespace Texture
   {
   private:
     double size;
-    std::vector<double> color1;
-    std::vector<double> color2;
+    double color1[3];
+    double color2[3];
     Transformer* trans;
 
   public:
@@ -26,12 +26,12 @@ namespace Texture
 
   public:
     void setSize(double s);
-    void setColor1(std::vector<double> c);
-    void setColor2 (std::vector<double> c);
+    void setColor1(double c[3]);
+    void setColor2 (double c[3]);
     void setTransformer(Transformer* trs);
 
   public:
-    void getChecker(std::vector<double> pt, std::vector<double>& c);
+    void getChecker(double pt[4], double c[3]);
   };
 }
 

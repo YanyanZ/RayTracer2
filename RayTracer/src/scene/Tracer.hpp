@@ -30,8 +30,8 @@ namespace Engine
     double pasx, pasy;
 
   private:
-    std::vector<double> aLight;
-    std::vector<double> cBackground;
+    double aLight[3];
+    double cBackground[3];
 
   private:
     double nbThrowRay;
@@ -39,36 +39,36 @@ namespace Engine
     unsigned char *map;
 
   public:
-    Tracer(Scene * s);
+    Tracer(Scene* s);
     ~Tracer(void);
 
   public:
-    void setPixel (int x, int y, std::vector<double> c);
-    void getPixel (int x, int y, std::vector<double> c);
+    void setPixel (int x, int y, double c[3]);
+    void getPixel (int x, int y, double c[3]);
 
   public:
     void initRay(double x, double y, Ray *r);
-    void throwRay(Ray *r, int deep, std::vector<double> coul);
-    void throwRays(int i, int j, std::vector<double> coul);
-    double evalHit(Ray* r, std::vector<double> hit,
+    void throwRay(Ray *r, int deep, double coul[3]);
+    void throwRays(int i, int j, double coul[3]);
+    double evalHit(Ray* r, double hit[4],
 		   Object** o);
     void evalDirectRadiance (Ray* r, Object* o,
-			     std::vector<double> hit,
-			     std::vector<double> normal,
-			     std::vector<double> coul);
+			     double hit[4],
+			     double normal[4],
+			     double coul[3]);
     void evalReflectRadiance(Ray* r, Object* o,
-			     std::vector<double> hit,
-			     std::vector<double> normal,
+			     double hit[4],
+			     double normal[4],
 			     int deep,
-			     std::vector<double> coul);
+			     double coul[3]);
     void evalSendRadiance(Ray* r, Object* o,
-			  std::vector<double> hit,
-			  std::vector<double> normal,
+			  double hit[4],
+			  double normal[4],
 			  int deep,
-			  std::vector<double> coul);
+			  double coul[3]);
     void evalAmbiantRadiance(Object* o,
-			     std::vector<double> p,
-			     std::vector<double> coul);
+			     double p[3],
+			     double coul[3]);
 
   public:
     void createScene(void);

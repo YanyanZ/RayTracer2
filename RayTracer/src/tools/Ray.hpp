@@ -1,6 +1,8 @@
 #ifndef RAY_HPP
 # define RAY_HPP
 
+# include <cstring>
+# include <cstdio>
 # include <vector>
 # include <cmath>
 
@@ -9,29 +11,29 @@ namespace Tools
   class Ray
   {
   private:
-    std::vector<double> origin;
-    std::vector<double> direction;
+    double origin[4];
+    double direction[4];
     bool in;
 
   public:
-    Ray(std::vector<double> orig, std::vector<double> dir);
+    Ray(double orig[4], double dir[4]);
     Ray(void);
     virtual ~Ray(void);
 
   public:
-    void setDirection(std::vector<double> dir);
-    void setOrigin(std::vector<double> orig);
+    void setDirection(double dir[4]);
+    void setOrigin(double orig[4]);
     void setIn(bool i);
 
   public:
-    void getDirection(std::vector<double>& dir);
-    void getOrigin(std::vector<double>& orig);
+    void getDirection(double dir[4]);
+    void getOrigin(double orig[4]);
 
   public:
     void swapInOut(void);
     bool isIn(void);
-    double dot(std::vector<double> vec);
-    void normalize(std::vector<double>& v);
+    double dot(double vec[4]);
+    void normalize(double v[4]);
   };
 }
 

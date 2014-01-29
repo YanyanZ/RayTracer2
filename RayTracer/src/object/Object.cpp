@@ -11,7 +11,6 @@ Object::Object(void)
     rhoT (0.5),
     n (1),
     shiness (1),
-    c ({1, 1, 1}),
     tPigment (COLOR),
     tNormal (NO),
     mapper (nullptr)
@@ -20,6 +19,9 @@ Object::Object(void)
 
 Object::~Object (void)
 {
+  c[0] = 1;
+  c[1] = 1;
+  c[2] = 1;
 }
 
 void Object::setEpsilon (double e)
@@ -60,7 +62,7 @@ void Object::setN(double v)
 
 void Object::setShininess(double v)
 {
-  shininess = v;
+  shiness = v;
 }
 
 void Object::setTypePigment(int t)
@@ -70,7 +72,7 @@ void Object::setTypePigment(int t)
 
 void Object::setTypeNormal(int type)
 {
-  tNormale = type;
+  tNormal = type;
 }
 
 double Object::getRhoT(void)
@@ -116,11 +118,11 @@ Object::getN(void)
 
 double Object::getShininess(void)
 {
-  return shininess;
+  return shiness;
 }
 
-double Object::distance(std::vector<double> p1,
-			std::vector<double> p2)
+double Object::distance(double* p1,
+			double* p2)
 {
   double d;
 
@@ -145,15 +147,15 @@ void Object::setTransformer (Transformer * trs)
 }
 
 bool Object::tRay(Ray* r,
-	      std::vector<double> i,
-	      std::vector<double> normal,
-	      Ray* r2)
+		  double i[4],
+		  double normal[4],
+		  Ray* r2)
 {
   double dev;
   double thetat, thetai;
   double coef;
   double ps;
-  std::vector<double> dir = {0, 0, 0, 0};
+  double dir[4];
 
   if (rhoT == 0)
     return false;
@@ -179,7 +181,7 @@ bool Object::tRay(Ray* r,
 
     r->getDirection(dir);
     for (int ii = 0; ii < 3; ii++)
-      dir[ii] = deviation * dir[ii] - coef * normal[ii];
+      dir[ii] = dev * dir[ii] - coef * normal[ii];
     dir[3] = 0;
 
     r2->setDirection(dir);
@@ -189,43 +191,43 @@ bool Object::tRay(Ray* r,
 }
 
 bool Object::rRay (Ray* r,
-		   std::vector<double> i,
-		   std::vector<double> normal,
+		   double i[4],
+		   double normal[4],
 		   Ray* r2)
 {
-  std::vector<double> dir = {0, 0, 0, 0};
+  double dir[4];
 
   if (rhoR == 0)
     return false;
   else
   {
-    rRay->setOrigin(i);
-    rRay->setIn(r->isIn());
+    r2->setOrigin(i);
+    r2->setIn(r->isIn());
 
     r->getDirection(dir);
     for (int j = 0; j < 3; j++)
       dir[j]= dir[j] - 2 * r->dot(normal) * normal[j];
     dir[3]=0;
 
-    rRay->setDirection(dir);
+    r2->setDirection(dir);
 
     return true;
   }
 }
 
-double Object::hit(Ray* r, std::vector<double> i)
+double Object::hit(Ray* r, double i[4])
 {
   return MAXDOUBLE;
 }
 
-void Object::normal(std::vector<double> p, Ray* r,
-		    std::vector<double> normal)
+void Object::normal(double p[4], Ray* r,
+		    double normal[4])
 {
 }
 
-void Object::setColor(std::vector<double> colo)
+void Object::setColor(double colo[3])
 {
-  c = colo;
+  memcpy(colo, c, 3 * sizeof(double));
 }
 
 void Object::setPerlin (PerlinNoise* pNoise)
@@ -248,14 +250,14 @@ void Object::setPerlinNormal(PerlinNoise* pNoise)
   pNormale = pNoise;
 }
 
-void Object::getColor (std::vector<double> p,
-		       std::vector<double> colo)
+void Object::getColor (double p[4],
+		       double colo[3])
 {
-  std::vector<double> p2 = {0, 0, 0, 0};
+  double p2[4];
 
   switch (tPigment)
   {
-    case COLoR:
+    case COLOR:
       for (int i = 0; i < 3; i++)
 	colo[i] = (1 - rhoT) * c[i];
       break;
@@ -263,28 +265,28 @@ void Object::getColor (std::vector<double> p,
       ccr->getChecker(p, colo);
       break;
     case PERLIN:
-      pColor->PerlinColor(p, colo);
+      //pColor->PerlinColor(p, colo);
       break;
     case TEXTURE:
       trans->transformInv(p2, p);
-      mapper->getMapping(p2, colo);
+      //mapper->getMapping(p2, colo);
       break;
     default:
       break;
     }
 }
 
-void Object::checkNormal(std::vector<double> n,
-			 std::vector<double> p,
+void Object::checkNormal(double n[4],
+			 double p[4],
 			 Ray* r)
 {
-  std::vector<double> temp = {0, 0, 0, 0};
-  std::vector<double> rd = {0, 0, 0, 0};
-  std::vector<double> tmp = {0, 0, 0, 0};
+  double temp[4];
+  double rd[4];
+  double tmp[4];
   double ps;
 
-  if (tNormal == PERLIN)
-    pNormale->PerlinNormal(p, n);
+  //if (tNormal == PERLIN)
+  //  pNormale->PerlinNormal(p, n);
 
   r->getDirection(tmp);
   trans->transformInv(rd,tmp);

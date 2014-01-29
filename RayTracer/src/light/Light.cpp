@@ -2,21 +2,21 @@
 
 using namespace Lightning;
 
-Light::Light (std::vector<double> c)
-  : color (c)
+Light::Light (double* c)
 {
+  memcpy(color, c, 3 * sizeof(double));
 }
 
 Light::~Light(void)
 {
 }
 
-void Light::getColor(std::vector<double> c)
+void Light::getColor(double c[3])
 {
-  c = color;
+  memcpy(c, color, 3 * sizeof(double));
 }
 
-void Light::normalize(std::vector<double> p)
+void Light::normalize(double p[4])
 {
   double d = 0;
 
@@ -28,7 +28,7 @@ void Light::normalize(std::vector<double> p)
     p[i] /= d;
 }
 
-double Light::dot(std::vector<double> p1, std::vector<double> p2)
+double Light::dot(double p1[4], double p2[4])
 {
   double ps = 0;
 

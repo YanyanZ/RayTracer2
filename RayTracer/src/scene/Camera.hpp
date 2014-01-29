@@ -19,8 +19,8 @@ namespace Engine
 
   private:
     double focal;
-    std::vector<double> position;
-    std::vector<double> lookAt;
+    double position[4];
+    double lookAt[4];
     double fov;
     int tProjection;
     double sProjection;
@@ -29,7 +29,7 @@ namespace Engine
     Transformer* trans;
 
   public:
-    Camera (std::vector<double> pos, std::vector<double> lat);
+    Camera (double pos[4], double lat[4]);
     ~Camera(void);
 
   public:

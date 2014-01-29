@@ -16,18 +16,18 @@ namespace Lightning
   class Light
   {
   protected:
-    std::vector<double> color;
+    double color[4];
 
   public:
-    Light(std::vector<double> c);
+    Light(double* c);
     virtual ~Light(void);
 
   public:
-    void normalize(std::vector<double> v);
-    double dot(std::vector<double> p1, std::vector<double> p2);
+    void normalize(double v[4]);
+    double dot(double p1[4], double p2[4]);
 
   public:
-    void getColor(std::vector<double> c);
+    void getColor(double c[3]);
   };
 }
 

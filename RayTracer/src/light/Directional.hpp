@@ -16,20 +16,19 @@ namespace Lightning
   class Directional : public Light
   {
   private:
-    std::vector<double> direction;
+    double direction[4];
 
   public:
-    Directional(std::vector<double> dir, std::vector<double> c);
+    Directional(double* dir, double* c);
     virtual ~Directional(void);
 
   public:
-    void getDirection(std::vector<double> dir);
+    void getDirection(double dir[4]);
     void getShiness(Ray* r,
-		    std::vector<double> p,
-		    std::vector<double> n,
+		    double p[4],
+		    double n[4],
 		    Object* o,
-		    std::vector<double> l);
-
+		    double l[3]);
   };
 }
 

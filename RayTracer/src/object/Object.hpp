@@ -33,7 +33,7 @@ namespace Form
     double rhoT;      /* 1 - rhoR */
     double n;	      /* indice de refraction de l'objet */
     double shiness; /* brillance */
-    std::vector<double> c;
+    double c[3];
     int tPigment;
     int tNormal;
 
@@ -49,7 +49,7 @@ namespace Form
     virtual ~Object(void);
 
   public:
-    double distance(std::vector<double> p1, std::vector<double> p2);
+    double distance(double* p1, double* p2);
 
   public:
     void setTransformer(Transformer* trs);
@@ -62,7 +62,7 @@ namespace Form
     void setN(double v);
     void setShininess(double v);
     void setTypePigment(int t);
-    void setColor(std::vector<double> colo);
+    void setColor(double colo[3]);
     void setChecker(Checker* cc);
     void setPerlin(PerlinNoise* pNoise);
     void setPerlinNormal(PerlinNoise* pNoise);
@@ -78,28 +78,28 @@ namespace Form
     double getRhoT(void);
     double getN(void);
     double getShininess(void);
-    void getColor(std::vector<double> p, std::vector<double> c);
-    void getChecker(std::vector<double> p, std::vector<double> c);
+    void getColor(double p[4], double c[3]);
+    void getChecker(double p[4], double c[3]);
     double getRefractionIndex(void);
 
   public:
     bool tRay(Ray* r,
-	      std::vector<double> i,
-	      std::vector<double> normal,
+	      double i[4],
+	      double normal[4],
 	      Ray* r2);
     bool rRay(Ray* r,
-	      std::vector<double> i,
-	      std::vector<double> normal,
+	      double i[4],
+	      double normal[4],
 	      Ray* r2);
 
   public:
-    virtual double hit(Ray* r, std::vector<double> i);
-    virtual void normal(std::vector<double> p, Ray* r,
-			std::vector<double> normal);
+    virtual double hit(Ray* r, double i[4]);
+    virtual void normal(double p[4], Ray* r,
+			double normal[4]);
 
   public:
-    void checkNormal(std::vector<double> n,
-		     std::vector<double> p,
+    void checkNormal(double n[4],
+		     double p[4],
 		     Ray* r);
   };
 }

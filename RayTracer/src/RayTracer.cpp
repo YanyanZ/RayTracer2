@@ -33,39 +33,38 @@ int main (int argc, char *argv[])
     int shadow = -1;
     int nbrays = 1;
 
-    std::vector<double> cBG = {0.2, 0.2, 0.8};
-    std::vector<double> color = {1, 0, 0};
+    double cBG[3] = {0, 0, 0};
+    double color[3] = {1, 0, 0};
 
     int c1 = 1;
     int c2 = 0;
     int c3 = 0;
 
-    std::vector<double> l1pos = {3, -5, 0};
-    std::vector<double> l1c = {1.0, 1.0, 1.0};
+    double l1pos[3] = {3, -5, 0};
+    double l1c[4] = {1.0, 1.0, 1.0};
 
-    std::vector<double> l2pos = {2, 1, 0};
-    std::vector<double> l2c = {1.0, 1.0, 1.0};
+    double l2pos[3] = {2, 1, 0};
+    double l2c[4] = {1.0, 1.0, 1.0};
 
-    std::vector<double> l3ac = {1.0, 1.0, 1.0};
+    double l3ac[4] = {0.5, 0.5, 0.5};
 
-    std::vector<double> campos = {0.2, 0.0, -0.1};
-    std::vector<double> lookat = {0, 0, 1};
+    double campos[4] = {0.2, 0.0, -0.1};
+    double lookat[3] = {0, 0, 1};
     double fov = 130;
 
     Sphere* o = new Sphere(2.5);
     o->setRhoA(0.3);
     o->setRhoD(0.3);
     o->setRhoS(0.9);
-    o->setRhoS(50);
     o->setRhoT(0.5);
     o->setColor(color);
     o->setN(1.0);
-
+    o->setShininess(50);
     int typePigment = Object::COLOR;
 
-    std::vector<double> translate = {-1, 0, 4};
-    std::vector<double> rotate = {0, 0, 0};
-    std::vector<double> scale = {1.0, 1.0, 1.0};
+    double translate[3] = {-1, 0, 4};
+    double rotate[3] = {0, 0, 0};
+    double scale[4] = {1.0, 1.0, 1.0};
 
     int typeNormale = Object::NO;
 
@@ -73,9 +72,9 @@ int main (int argc, char *argv[])
     trans->setTranslation(translate);
     trans->setRotation(rotate);
     trans->setScale(scale);
-    o->setTransformer (trans);
-    o->setTypePigment (typePigment);
-    o->setTypeNormal (typeNormale);
+    o->setTransformer(trans);
+    o->setTypePigment(typePigment);
+    o->setTypeNormal(typeNormale);
 
     s->setBackground(cBG);
     s->setGlobalSetting(max_trace_level, anti, threshold, shadow,
