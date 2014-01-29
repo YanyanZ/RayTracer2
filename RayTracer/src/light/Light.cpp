@@ -1,6 +1,6 @@
 # include <light/Light.hpp>
 
-using namespace Lightness;
+using namespace Lightning;
 
 Light::Light (std::vector<double> c)
   : color (c)

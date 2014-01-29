@@ -1,6 +1,8 @@
-# include "box.h"
+# include <object/Box.hpp>
 
-box::box (double s)
+using namespace Form;
+
+Box::Box (double s)
   : Object(), side (s)
 {
   double l = side / 2.0;
@@ -14,23 +16,22 @@ box::box (double s)
   std::vector<double> p8 = {-l, -l, l, 1};
 
   Transformer *trans;
-  trans = new transformer();
+  trans = new Transformer();
 
   sides.push_back(new Parallelogram(p1, p2, p4));
-  sides.push_back(new parallelogram (p6, p7, p5));
-  sides.push_back(new parallelogram (p1, p2, p6));
-  sides.push_back(new parallelogram (p2, p7, p3));
-  sides.push_back(new parallelogram (p3, p8, p4));
-  sides.push_back(new parallelogram (p4, p5, p1));
+  sides.push_back(new Parallelogram (p6, p7, p5));
+  sides.push_back(new Parallelogram (p1, p2, p6));
+  sides.push_back(new Parallelogram (p2, p7, p3));
+  sides.push_back(new Parallelogram (p3, p8, p4));
+  sides.push_back(new Parallelogram (p4, p5, p1));
 
   for(int i = 0; i < sides.size(); i++)
     sides[i]->setTransformer(trans);
 }
 
-box::~Box(void)
+Box::~Box(void)
 {
-  if (sides)
-    delete sides;
+
 }
 
 double Box::hit(Ray* r, std::vector<double> i)
@@ -48,7 +49,7 @@ double Box::hit(Ray* r, std::vector<double> i)
   r->getDirection(dir);
 
   trans->transformInv(pos2, pos);
-  trans->ransformInv(dir2, dir);
+  trans->transformInv(dir2, dir);
 
   r2 = new Ray(pos2, dir2);
 
@@ -81,31 +82,31 @@ void Box::normal(std::vector<double> p,
 
   trans->transform(pt, p);
   for (int j = 0; j < 4; j++)
-    normal[j] = 0.0;
+    n[j] = 0.0;
 
-  switch (faceIntersectee)
+  switch (hitSide)
   {
     case 0:
-      normal[0] = 1;
+      n[0] = 1;
       break;
     case 1:
-      normal[0] = -1;
+      n[0] = -1;
       break;
     case 2:
-      normal[1] = 1;
+      n[1] = 1;
       break;
     case 3:
-      normal[2] = 1;
+      n[2] = 1;
       break;
     case 4:
-      normal[1] = -1;
+      n[1] = -1;
       break;
     case 5:
-      normal[2] = -1;
+      n[2] = -1;
       break;
     default:
       break;
     }
 
-  checkNormal(Normal, pt, r);
+  checkNormal(n, pt, r);
 }

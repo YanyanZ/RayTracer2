@@ -19,10 +19,11 @@ using namespace Generator;
 
 namespace Form
 {
-  enum {COLOR, TEXTURE, PERLIN, CHECKER, NO};
-
   class Object
   {
+  public:
+    enum {COLOR, TEXTURE, PERLIN, CHECKER, NO};
+
   protected:
     double epsilon;
     double rhoA;      /* coefficient attenuation lumiere ambiente */
@@ -61,7 +62,7 @@ namespace Form
     void setN(double v);
     void setShininess(double v);
     void setTypePigment(int t);
-    void setColor(double colo);
+    void setColor(std::vector<double> colo);
     void setChecker(Checker* cc);
     void setPerlin(PerlinNoise* pNoise);
     void setPerlinNormal(PerlinNoise* pNoise);

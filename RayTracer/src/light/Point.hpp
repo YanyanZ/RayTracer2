@@ -5,7 +5,10 @@
 
 # include <light/Light.hpp>
 
+# include <object/Object.hpp>
+
 using namespace Form;
+using namespace Tools;
 
 namespace Lightning
 {

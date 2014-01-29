@@ -1,6 +1,6 @@
 # include <light/Ambiant.hpp>
 
-using namespace Lighting;
+using namespace Lightning;
 
 Ambiant::Ambiant(std::vector<double> c)
   : Light(c)

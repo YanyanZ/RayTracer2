@@ -1,5 +1,7 @@
 # include <light/Point.hpp>
 
+using namespace Lightning;
+
 Point::Point(std::vector<double> pos, std::vector<double> c)
   : Light(c), c1 (1), c2 (0), c3 (0)
 {
@@ -90,13 +92,13 @@ void Point::getShiness(Ray* r,
     if (ps2 > 0.0)
     {
       for (int i = 0; i < 3; i++)
-	l[i] = fd * color[i] * (o->getRhoD() * coulObj[i] * ps1 +
+	l[i] = fd * color[i] * (o->getRhoD() * color[i] * ps1 +
 				o->getRhoS() * pow (ps2, o->getShininess()));
     }
     else
     {
       for (int i = 0; i < 3; i++)
-	l[i] = fd * color[i] * (o->getRhoD() * coulObj[i] * ps1);
+	l[i] = fd * color[i] * (o->getRhoD() * color[i] * ps1);
     }
   }
   else

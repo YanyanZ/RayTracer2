@@ -27,7 +27,6 @@ void Directional::getShiness(Ray* r,
   std::vector<double> reflect = {0, 0, 0, 0};
   std::vector<double> c2 = {0, 0, 0};
   std::vector<double> dir = {0, 0, 0, 0};
-  double dist;
   double ps1, ps2;
 
   o->getColor(p, c2);
@@ -50,13 +49,13 @@ void Directional::getShiness(Ray* r,
     if (ps2 > 0.0)
     {
       for (int i = 0; i < 3; i++)
-	l[i] = c[i] * (o->getRhoD() * coulObj[i] * ps1 +
+	l[i] = c2[i] * (o->getRhoD() * c2[i] * ps1 +
 		       o->getRhoS() * pow(ps2, o->getShininess()));
     }
     else
     {
       for (int i = 0; i < 3; i++)
-	l[i] = c[i] * (o->getRhoD() * c2[i] * ps1);
+	l[i] = c2[i] * (o->getRhoD() * c2[i] * ps1);
     }
   else
   {

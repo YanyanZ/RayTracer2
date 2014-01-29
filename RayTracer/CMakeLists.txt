@@ -12,5 +12,7 @@ add_subdirectory (src)
 
 add_executable(${PRG_NAME} ${SOURCE})
 
-target_link_libraries(${PRG_NAME} Parser)
+#target_link_libraries(${PRG_NAME} Parser)
 target_link_libraries(${PRG_NAME} Scene)
+target_link_libraries(${PRG_NAME} Light)
+target_link_libraries(${PRG_NAME} Object)

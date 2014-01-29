@@ -9,6 +9,7 @@
 # include <tools/Ray.hpp>
 
 using namespace Tools;
+using namespace Form;
 
 namespace Lightning
 {

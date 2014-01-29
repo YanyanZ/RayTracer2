@@ -1,14 +1,14 @@
 SET(SOURCES Box.cpp
-  Cone.cpp
-  Cube.cpp
-  Cylinder.cpp
+#  Cone.cpp
+#  Cube.cpp
+#  Cylinder.cpp
   Object.cpp
-  Parallelogram.cpp
+#  Parallelogram.cpp
   Plan.cpp
 #  Pyramid3.cpp
 #  Pyramid4.cpp
   Sphere.cpp
-  Tore.cpp
+#  Tore.cpp
   Triangle.cpp
 )
 

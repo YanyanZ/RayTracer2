@@ -1,4 +1,6 @@
-# include <object/Cone.hpp
+# include <object/Cone.hpp>
+
+using namespace Form;
 
 Cone::Cone(double sr, double br, double h)
   : Object(), sRadius (sr), bRadius (br), heigh (h)
