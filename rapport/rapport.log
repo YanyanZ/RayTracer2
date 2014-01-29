@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.10)  29 JAN 2014 03:41
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.10)  29 JAN 2014 04:01
 entering extended mode
  %&-line parsing enabled.
 **rapport.tex
@@ -473,7 +473,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 98.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 98.
- [2] [3] (./rapport.aux) ) 
+
+Overfull \hbox (32.24997pt too wide) in paragraph at lines 121--123
+\T1/cmr/m/n/10 tribuer la couleur de l'ob-jet. A cela vien-dra s'a-jouter les c
+ouleurs provenant des dif-férentes lu-mières. 
+ []
+
+[2] [3] (./rapport.aux) ) 
 Here is how much of TeX's memory you used:
  3393 strings out of 495061
  45525 string characters out of 1182620
@@ -482,19 +488,19 @@ Here is how much of TeX's memory you used:
  11714 words of font info for 25 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  35i,6n,43p,221b,280s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/yussak/.texmf-var/fonts/pk/ljfour/jknappen/ec
-/ecsx1440.600pk> </home/yussak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx2488.
-600pk> </home/yussak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </h
-ome/yussak/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk> </home/yussak
-/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/yussak/.texmf-va
-r/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/yussak/.texmf-var/fonts/pk
-/ljfour/jknappen/ec/eccc1440.600pk></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on rapport.pdf (3 pages, 94285 bytes).
+ </home/yussak/.texmf-var/fonts/pk/ljfour/jknappen/ec/
+ecsx1440.600pk> </home/yussak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx2488.6
+00pk> </home/yussak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </ho
+me/yussak/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk> </home/yussak/
+.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/yussak/.texmf-var
+/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/yussak/.texmf-var/fonts/pk/
+ljfour/jknappen/ec/eccc1440.600pk></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on rapport.pdf (3 pages, 97470 bytes).
 PDF statistics:
- 207 PDF objects out of 1000 (max. 8388607)
+ 213 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

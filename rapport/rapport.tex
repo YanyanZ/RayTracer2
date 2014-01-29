@@ -118,8 +118,22 @@ de la lumière. $\vec{LRefl}$ le rayon réfléchi de la lumière sur l'objet. $\
 
     \section{monochrome}
 
+La texture de tous les triangles est monochrome (en RGB). Ainsi un rayon de la caméra touchant un objet se vera
+attribuer la couleur de l'objet. A cela viendra s'ajouter les couleurs provenant des différentes lumières.
+
 \part{Représentation des objets}
 
     \section{Surface définie par triangles}
+
+Toutes les surfaces sont définies par des triangles car ils sont très facile à manipuler. Ces triangles sont définis par
+les coordonnées de leurs trois sommets ainsi que de leur normale qui permet de connaitre leur orientation. Cette normale
+va notamment être utilisée pour les calculs de diffusion et de réflexion de la lumière ainsi que pour les effets de
+lissage telles Phong ou Gouraud.
+
+Le principe de ces techniques de lissage est assez simple, lorsque dans une de nos formules on utilise la normale à
+l'objet impacté par le rayon, à la place, on va prendre une moyenne pondérée de la normale de cet objet et de celles de
+ses voisins. Plus le point d'impact est proche d'un triangle, plus sa normale aura d'influence. Ainsi on obtient un
+effet lissé beaucoup plus réaliste et il faut moins de polygones pour avoir un rendu correct.
     
+\part{Bonus}
 \end{document}
