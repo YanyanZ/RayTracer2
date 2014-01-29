@@ -3,48 +3,24 @@
 using namespace Tools;
 
 Transformer::Transformer(void)
-  : translation ({{0.0, 0.0, 0.0, 0.0},
-      {0.0, 0.0, 0.0, 0.0},
-      {0.0, 0.0, 0.0, 0.0},
-      {0.0, 0.0, 0.0, 0.0}}),
-    rotation ({{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0}}),
-    scale ({{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0}}),
-    transformation ({{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0}}),
-    invTranslation ({{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0}}),
-    invRotation ({{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0}}),
-    invScale ({{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0}}),
-    invTransformation ({{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0},
-	{0.0, 0.0, 0.0, 0.0}})
 {
+  loadIdMatrix(translation);
+  loadIdMatrix(rotation);
+  loadIdMatrix(scale);
+  loadIdMatrix(invTranslation);
+  loadIdMatrix(invRotation);
+  loadIdMatrix(invScale);
+  loadIdMatrix(transformation);
+  loadIdMatrix(invTransformation);
 }
 
 Transformer::~Transformer(void)
 {
 }
 
-void Transformer::mult(std::vector<double>& res,
-		       std::vector<double> point,
-		       std::vector<std::vector<double> > mat)
+void Transformer::mult(double* res,
+		       double point[4],
+		       double mat[4][4])
 {
   int i, j;
   double val;
@@ -62,16 +38,16 @@ void Transformer::mult(std::vector<double>& res,
       res[i] = res[i] / res[3];
 }
 
-void Transformer::mult(std::vector<std::vector<double> >& res,
-		       std::vector<std::vector<double> > mat1,
-		       std::vector<std::vector<double> > mat2)
+void Transformer::mult(double res[4][4],
+		       double mat1[4][4],
+		       double mat2[4][4])
 {
   int i, j, k;
   double val;
-  std::vector<std::vector<double> > r = {{0.0, 0.0, 0.0, 0.0},
-					 {0.0, 0.0, 0.0, 0.0},
-					 {0.0, 0.0, 0.0, 0.0},
-					 {0.0, 0.0, 0.0, 0.0}};
+  double r[4][4] = {{0.0, 0.0, 0.0, 0.0},
+		      {0.0, 0.0, 0.0, 0.0},
+		      {0.0, 0.0, 0.0, 0.0},
+		      {0.0, 0.0, 0.0, 0.0}};
 
   for (i = 0; i < 4; i++)
     for (j = 0; j < 4; j++)
@@ -87,7 +63,7 @@ void Transformer::mult(std::vector<std::vector<double> >& res,
       res[i][j] = r[i][j];
 }
 
-void Transformer::loadZeroMatrix(std::vector<std::vector<double> > m)
+void Transformer::loadZeroMatrix(double m[4][4])
 {
 
   for (int i = 0; i < 4; i++)
@@ -95,7 +71,7 @@ void Transformer::loadZeroMatrix(std::vector<std::vector<double> > m)
       m[i][j] = 0;
 }
 
-void Transformer::loadIdMatrix(std::vector<std::vector<double> > m)
+void Transformer::loadIdMatrix(double m[4][4])
 {
   loadZeroMatrix(m);
 
@@ -103,54 +79,54 @@ void Transformer::loadIdMatrix(std::vector<std::vector<double> > m)
     m[i][i] = 1;
 }
 
-void Transformer::setTranslation(std::vector<double> trs)
+void Transformer::setTranslation(double trs[3])
 {
-  std::vector<std::vector<double> > temp = {{0.0, 0.0, 0.0, 0.0},
-					    {0.0, 0.0, 0.0, 0.0},
-					    {0.0, 0.0, 0.0, 0.0},
-					    {0.0, 0.0, 0.0, 0.0}};
+  double temp[4][4] = {{0.0, 0.0, 0.0, 0.0},
+		       {0.0, 0.0, 0.0, 0.0},
+		       {0.0, 0.0, 0.0, 0.0},
+		       {0.0, 0.0, 0.0, 0.0}};
 
   loadIdMatrix(translation);
   for (int i = 0; i < 3; i++)
     translation[i][3] = trs[i];
 
-  temp = transformation;
+  memcpy(temp, transformation, 4 * 4 * sizeof(double));
   mult(transformation, temp, translation);
 
   loadIdMatrix(invTranslation);
   for (int i = 0; i < 3; i++)
     invTranslation[i][3] = -trs[i];
 
-  temp = invTransformation;
+  memcpy(temp, invTransformation, 4 * 4 * sizeof(double));
   mult(invTransformation, invTranslation, temp);
 }
 
-void Transformer::setRotation(std::vector<double> r)
+void Transformer::setRotation(double r[3])
 {
-  std::vector<std::vector<double> > rx= {{0.0, 0.0, 0.0, 0.0},
-					 {0.0, 0.0, 0.0, 0.0},
-					 {0.0, 0.0, 0.0, 0.0},
-					 {0.0, 0.0, 0.0, 0.0}};
+  double rx[4][4]= {{0.0, 0.0, 0.0, 0.0},
+		    {0.0, 0.0, 0.0, 0.0},
+		    {0.0, 0.0, 0.0, 0.0},
+		    {0.0, 0.0, 0.0, 0.0}};
 
-  std::vector<std::vector<double> > ry = {{0.0, 0.0, 0.0, 0.0},
-					  {0.0, 0.0, 0.0, 0.0},
-					  {0.0, 0.0, 0.0, 0.0},
-					  {0.0, 0.0, 0.0, 0.0}};
+  double ry[4][4] = {{0.0, 0.0, 0.0, 0.0},
+		     {0.0, 0.0, 0.0, 0.0},
+		     {0.0, 0.0, 0.0, 0.0},
+		     {0.0, 0.0, 0.0, 0.0}};
 
-  std::vector<std::vector<double> > rz = {{0.0, 0.0, 0.0, 0.0},
-					  {0.0, 0.0, 0.0, 0.0},
-					  {0.0, 0.0, 0.0, 0.0},
-					  {0.0, 0.0, 0.0, 0.0}};
+  double rz[4][4] = {{0.0, 0.0, 0.0, 0.0},
+		     {0.0, 0.0, 0.0, 0.0},
+		     {0.0, 0.0, 0.0, 0.0},
+		     {0.0, 0.0, 0.0, 0.0}};
 
-  std::vector<std::vector<double> > temp = {{0.0, 0.0, 0.0, 0.0},
-					    {0.0, 0.0, 0.0, 0.0},
-					    {0.0, 0.0, 0.0, 0.0},
-					    {0.0, 0.0, 0.0, 0.0}};
+  double temp[4][4] = {{0.0, 0.0, 0.0, 0.0},
+		       {0.0, 0.0, 0.0, 0.0},
+		       {0.0, 0.0, 0.0, 0.0},
+		       {0.0, 0.0, 0.0, 0.0}};
 
-  std::vector<std::vector<double> > temp2 = {{0.0, 0.0, 0.0, 0.0},
-					     {0.0, 0.0, 0.0, 0.0},
-					     {0.0, 0.0, 0.0, 0.0},
-					    {0.0, 0.0, 0.0, 0.0}};
+  double temp2[4][4] = {{0.0, 0.0, 0.0, 0.0},
+			{0.0, 0.0, 0.0, 0.0},
+			{0.0, 0.0, 0.0, 0.0},
+			{0.0, 0.0, 0.0, 0.0}};
 
   loadIdMatrix(rx);
   loadIdMatrix(ry);
@@ -176,7 +152,7 @@ void Transformer::setRotation(std::vector<double> r)
   mult(temp2, temp, ry);
   mult(rotation, temp2, rx);
 
-  temp = transformation;
+  memcpy(temp, transformation, 4 * 4 * sizeof(double));
   mult(transformation, temp, rotation);
 
   /* inversion de la matrice */
@@ -200,22 +176,22 @@ void Transformer::setRotation(std::vector<double> r)
   mult(temp2, temp, ry);
   mult(this->invRotation, temp2, rz);
 
-  temp = invTransformation;
+  memcpy(temp, invTransformation, 4 * 4 * sizeof(double));
   mult(invTransformation, invRotation, temp);
 }
 
-void Transformer::setScale(std::vector<double> s)
+void Transformer::setScale(double s[3])
 {
-  std::vector<std::vector<double> > temp = {{0, 0, 0, 0},
-					    {0.0, 0.0, 0.0, 0.0},
-					    {0.0, 0.0, 0.0, 0.0},
-					    {0, 0, 0, 0}};
+  double temp[4][4] = {{0, 0, 0, 0},
+		       {0.0, 0.0, 0.0, 0.0},
+		       {0.0, 0.0, 0.0, 0.0},
+		       {0, 0, 0, 0}};
   loadIdMatrix(scale);
 
   for (int i = 0; i < 3; i++)
     scale[i][i] = s[i];
 
-  temp = transformation;
+  memcpy(temp, transformation, 4 * 4 * sizeof(double));
   mult(transformation, temp, scale);
 
   loadIdMatrix(invScale);
@@ -223,12 +199,12 @@ void Transformer::setScale(std::vector<double> s)
   for (int i = 0; i < 3; i++)
     invScale[i][i] = 1.0 / s[i];
 
-  temp = invTransformation;
+  memcpy(temp, invTransformation,  4 * 4 * sizeof(double));
   mult(invTransformation, invScale, temp);
 }
 
-void Transformer::transform(std::vector<double> res,
-			    std::vector<double> vec)
+void Transformer::transform(double res[4],
+			    double vec[4])
 {
   mult(res, vec, transformation);
   if (res[3]!=0)
@@ -236,8 +212,8 @@ void Transformer::transform(std::vector<double> res,
       res[i]/=res[3];
 }
 
-void Transformer::transformInv(std::vector<double> res,
-			       std::vector<double> vec)
+void Transformer::transformInv(double res[4],
+			       double vec[4])
 {
   mult(res, vec, invTransformation);
   if (res[3]!=0)
@@ -245,9 +221,8 @@ void Transformer::transformInv(std::vector<double> res,
       res[i]/=res[3];
 }
 
-void Transformer::normalize(std::vector<double>& p)
+void Transformer::normalize(double p[4])
 {
-
   double d = 0;
 
   for (int i = 0; i < 3; i++)

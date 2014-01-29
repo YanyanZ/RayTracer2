@@ -1,10 +1,10 @@
 #ifndef POINT_HPP
 # define POINT_HPP
 
-# include <vector>
+# include <cstring>
+# include <cstdio>
 
 # include <light/Light.hpp>
-
 # include <object/Object.hpp>
 
 using namespace Form;
@@ -15,11 +15,11 @@ namespace Lightning
   class Point : public Light
   {
   private:
-    std::vector<double> position;
+    double position[4];
     double c1, c2, c3;
 
   public:
-    Point(std::vector<double> pos, std::vector<double> c);
+    Point(double *pos, double* c);
     virtual ~Point(void);
 
   public:
@@ -32,11 +32,11 @@ namespace Lightning
 
   public:
     void getShiness(Ray* r,
-		    std::vector<double> p,
-		    std::vector<double> n,
+		    double p[4],
+		    double n[4],
 		    Object* o,
-		    std::vector<double> l);
-    void getPosition (std::vector<double> pos);
+		    double l[3]);
+    void getPosition (double pos[4]);
   };
 }
 #endif

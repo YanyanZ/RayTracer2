@@ -11,7 +11,6 @@ Object::Object(void)
     rhoT (0.5),
     n (1),
     shiness (1),
-    c ({1, 1, 1}),
     tPigment (COLOR),
     tNormal (NO),
     mapper (nullptr)
@@ -20,6 +19,9 @@ Object::Object(void)
 
 Object::~Object (void)
 {
+  c[0] = 1;
+  c[1] = 1;
+  c[2] = 1;
 }
 
 void Object::setEpsilon (double e)
@@ -119,8 +121,8 @@ double Object::getShininess(void)
   return shiness;
 }
 
-double Object::distance(std::vector<double> p1,
-			std::vector<double> p2)
+double Object::distance(double* p1,
+			double* p2)
 {
   double d;
 
@@ -145,15 +147,15 @@ void Object::setTransformer (Transformer * trs)
 }
 
 bool Object::tRay(Ray* r,
-	      std::vector<double> i,
-	      std::vector<double> normal,
-	      Ray* r2)
+		  double i[4],
+		  double normal[4],
+		  Ray* r2)
 {
   double dev;
   double thetat, thetai;
   double coef;
   double ps;
-  std::vector<double> dir = {0, 0, 0, 0};
+  double dir[4];
 
   if (rhoT == 0)
     return false;
@@ -189,11 +191,11 @@ bool Object::tRay(Ray* r,
 }
 
 bool Object::rRay (Ray* r,
-		   std::vector<double> i,
-		   std::vector<double> normal,
+		   double i[4],
+		   double normal[4],
 		   Ray* r2)
 {
-  std::vector<double> dir = {0, 0, 0, 0};
+  double dir[4];
 
   if (rhoR == 0)
     return false;
@@ -213,19 +215,19 @@ bool Object::rRay (Ray* r,
   }
 }
 
-double Object::hit(Ray* r, std::vector<double> i)
+double Object::hit(Ray* r, double i[4])
 {
   return MAXDOUBLE;
 }
 
-void Object::normal(std::vector<double> p, Ray* r,
-		    std::vector<double> normal)
+void Object::normal(double p[4], Ray* r,
+		    double normal[4])
 {
 }
 
-void Object::setColor(std::vector<double> colo)
+void Object::setColor(double colo[3])
 {
-  c = colo;
+  memcpy(colo, c, 3 * sizeof(double));
 }
 
 void Object::setPerlin (PerlinNoise* pNoise)
@@ -248,10 +250,10 @@ void Object::setPerlinNormal(PerlinNoise* pNoise)
   pNormale = pNoise;
 }
 
-void Object::getColor (std::vector<double> p,
-		       std::vector<double> colo)
+void Object::getColor (double p[4],
+		       double colo[3])
 {
-  std::vector<double> p2 = {0, 0, 0, 0};
+  double p2[4];
 
   switch (tPigment)
   {
@@ -274,13 +276,13 @@ void Object::getColor (std::vector<double> p,
     }
 }
 
-void Object::checkNormal(std::vector<double> n,
-			 std::vector<double> p,
+void Object::checkNormal(double n[4],
+			 double p[4],
 			 Ray* r)
 {
-  std::vector<double> temp = {0, 0, 0, 0};
-  std::vector<double> rd = {0, 0, 0, 0};
-  std::vector<double> tmp = {0, 0, 0, 0};
+  double temp[4];
+  double rd[4];
+  double tmp[4];
   double ps;
 
   //if (tNormal == PERLIN)

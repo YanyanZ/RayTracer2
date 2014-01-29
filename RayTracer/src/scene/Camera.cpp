@@ -2,11 +2,12 @@
 
 using namespace Engine;
 
-Camera::Camera (std::vector<double> pos, std::vector<double> lat)
+Camera::Camera (double pos[4], double lat[4])
   : fov (60), sProjection (10)
 {
-  position = pos;
-  lookAt = lat;
+  memcpy(position, pos, 4 * sizeof(double));
+  memcpy(lookAt, lat, 4 * sizeof(double));
+
   setTransformation();
 }
 
@@ -58,11 +59,15 @@ const double Camera::getSProjection(void)
 
 void Camera::setTransformation(void)
 {
-  std::vector<double> rot = {0, 0, 0};
-  std::vector<double> transla = {position[0], position[1], position[2]};
-  std::vector<double> vlookAt = {0, 0, 0, 0};
+  double rot[3];
+  double transla[3];
+  double vlookAt[4];
   double theta;
   double d;
+
+  transla[0] = position[0];
+  transla[1] = position[1];
+  transla[2] = position[2];
 
   trans = new Transformer();
   trans->setTranslation(transla);
@@ -92,10 +97,10 @@ void Camera::setTransformation(void)
 
 void Camera::rScene(Ray* r, Ray* r2)
 {
-  std::vector<double> dir = {0, 0, 0, 0};
-  std::vector<double> pos = {0, 0, 0, 0};
-  std::vector<double> dir2 = {0, 0, 0, 0};
-  std::vector<double> pos2 = {0, 0, 0, 0};
+  double dir[4] = {0, 0, 0, 0};
+  double pos[4] = {0, 0, 0, 0};
+  double dir2[4] = {0, 0, 0, 0};
+  double pos2[4] = {0, 0, 0, 0};
 
   r->getOrigin(pos);
   r->getDirection(dir);

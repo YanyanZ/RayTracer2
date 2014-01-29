@@ -3,10 +3,15 @@
 using namespace Texture;
 
 Checker::Checker(void)
-  : size (1),
-    color1 ({1.0, 1.0, 1.0}),
-    color2 ({0.0, 0.0, 0.0})
+  : size (1)
 {
+  color1[0] = 1;
+  color1[1] = 1;
+  color1[2] = 1;
+
+  color2[0] = 0;
+  color2[1] = 0;
+  color2[2] = 0;
 }
 
 Checker::~Checker(void)
@@ -18,15 +23,15 @@ void Checker::setSize(double s)
   size = s;
 }
 
-void Checker::setColor1(std::vector<double> c)
+void Checker::setColor1(double c[3])
 {
-  color1 = c;
+  memcpy(color1, c, 3 * sizeof(double));
 }
 
 void
-Checker::setColor2(std::vector<double> c)
+Checker::setColor2(double c[3])
 {
-  color2 = c;
+  memcpy(color2, c, 3 * sizeof(double));
 }
 
 void Checker::setTransformer(Transformer* trs)
@@ -34,10 +39,10 @@ void Checker::setTransformer(Transformer* trs)
   trans = trs;
 }
 
-void Checker::getChecker(std::vector<double> pt,
-			 std::vector<double>& c)
+void Checker::getChecker(double pt[4],
+			 double c[3])
 {
-  std::vector<double> p2;
+  double p2[4];
 
   trans->transform(p2, pt);
 
@@ -60,11 +65,11 @@ void Checker::getChecker(std::vector<double> pt,
 
   if (zpair)
     if ((xpair && ypair) || (!xpair && !ypair))
-      c = color1;
+      memcpy(c, color1, 3 * sizeof(double));
     else
-      c = color2;
+      memcpy(c, color2, 3 * sizeof(double));
   else if ((xpair && ypair) || (!xpair && !ypair))
-    c = color2;
+    memcpy(c, color2, 3 * sizeof(double));
   else
-    c = color1;
+    memcpy(c, color1, 3 * sizeof(double));
 }

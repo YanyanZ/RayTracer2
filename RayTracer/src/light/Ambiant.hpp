@@ -10,7 +10,7 @@ namespace Lightning
   class Ambiant : public Light
   {
   public:
-    Ambiant(std::vector<double> c);
+    Ambiant(double c[3]);
     virtual ~Ambiant(void);
   };
 }

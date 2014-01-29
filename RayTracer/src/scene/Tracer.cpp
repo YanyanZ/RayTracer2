@@ -34,14 +34,14 @@ void Tracer::saveScene(std::string output)
   of.close ();
 }
 
-void Tracer::setPixel (int x, int y, std::vector<double> c)
+void Tracer::setPixel (int x, int y, double c[3])
 {
   map[x * 3 * width + y * 3] = static_cast<unsigned char>(c[0] * 255);
   map[x * 3 * width + y * 3 + 1] = static_cast<unsigned char>(c[1] * 255);
   map[x * 3 * width + y * 3 + 2] = static_cast<unsigned char>(c[2] * 255);
 }
 
-void Tracer::getPixel (int x, int y, std::vector<double> c)
+void Tracer::getPixel (int x, int y, double c[3])
 {
   c[0] = map[x * 3 * width + y * 3];
   c[1] = map[x * 3 * width + y * 3 + 1];
@@ -51,11 +51,11 @@ void Tracer::getPixel (int x, int y, std::vector<double> c)
 void Tracer::createScene(void)
 {
   int i, j;
-  std::vector<double> color = {0, 0, 0};
+  double color[3];
 
   s->getAmbiant(aLight);
 
-  cBackground = s->getBackground();
+  memcpy(cBackground, s->getBackground(), 3 * sizeof(double));
 
   width = s->getOutputWidth();
   height = s->getOutputHeight();
@@ -78,13 +78,13 @@ void Tracer::createScene(void)
     }
 }
 
-void Tracer::throwRays(int i, int j, std::vector<double> c)
+void Tracer::throwRays(int i, int j, double c[3])
 {
-  std::vector<double> ctmp = {0, 0, 0};
-  std::vector<int> ph = {0, 0};
-  std::vector<int> pg = {0, 0};
-  std::vector<double> ch = {0, 0, 0};
-  std::vector<double> cg = {0, 0, 0};
+  double ctmp[3];
+  int ph[2];
+  int pg[2];
+  double ch[3];
+  double cg[3];
   double diff1, diff2;
   double x, y, k;
   int aa = s->getAntialiasing ();
@@ -97,7 +97,9 @@ void Tracer::throwRays(int i, int j, std::vector<double> c)
   initRay(x, y, r);
   (s->getCamera())->rScene(r, r2);
 
-  c = {0, 0, 0};
+  c[0] = 0;
+  c[1] = 0;
+  c[2] = 0;
 
   throwRay(r2, s->getMaxTraceLevel(), c);
 
@@ -188,32 +190,32 @@ void Tracer::initRay(double x, double y, Ray* r)
 
   if (c->getTProjection() == Camera::PERSPECTIVE)
   {
-    std::vector<double> dir = {x, y, c->getFocal(), 0};;
-    std::vector<double> pos = {0, 0, 0, 1};
+    double dir[4] = {x, y, c->getFocal(), 0};;
+    double pos[4] = {0, 0, 0, 1};
 
     r->setOrigin(pos);
     r->setDirection(dir);
   }
   else
   {
-    std::vector<double> dir = {0, 0, 1, 0};
-    std::vector<double> pos = {x , y, 0, 1};
+    double dir[4] = {0, 0, 1, 0};
+    double pos[4] = {x , y, 0, 1};
 
     r->setOrigin(pos);
     r->setDirection(dir);
   }
 }
 
-void Tracer::throwRay(Ray* r, int deep, std::vector<double> c)
+void Tracer::throwRay(Ray* r, int deep, double c[3])
 {
   double d;
-  Object *o;
-  std::vector<double> hit = {0, 0, 0, 0};
-  std::vector<double> normal = {0, 0, 0, 0};
-  std::vector<double> cDirect = {0, 0, 0};
-  std::vector<double> cAmbient = {0, 0, 0};
-  std::vector<double> cReflect = {0, 0, 0};
-  std::vector<double> cSend = {0, 0, 0};
+  Object *o = nullptr;
+  double hit[4] = {0, 0, 0, 0};
+  double normal[4] = {0, 0, 0, 0};
+  double cDirect[3] = {0, 0, 0};
+  double cAmbient[3] = {0, 0, 0};
+  double cReflect[3] = {0, 0, 0};
+  double cSend[3] = {0, 0, 0};
 
   if (deep > 0)
   {
@@ -243,11 +245,11 @@ void Tracer::throwRay(Ray* r, int deep, std::vector<double> c)
   }
 }
 
-double Tracer::evalHit(Ray* r, std::vector<double> hit, Object** o)
+double Tracer::evalHit(Ray* r, double hit[], Object** o)
 {
   double d1, d2;
   Object *o2;
-  std::vector<double> i2 = {0, 0, 0, 0};
+  double i2[4] = {0, 0, 0, 0};
 
   *o = s->getObject(0);
   d1 = (*o)->hit(r, hit);
@@ -260,7 +262,7 @@ double Tracer::evalHit(Ray* r, std::vector<double> hit, Object** o)
     {
       d1 = d2;
       *o = s->getObject (i);
-      hit = i2;
+      memcpy(hit, i2, 4 * sizeof(double));
     }
   }
 
@@ -268,12 +270,15 @@ double Tracer::evalHit(Ray* r, std::vector<double> hit, Object** o)
 }
 
 void Tracer::evalDirectRadiance(Ray* r, Object* o,
-				std::vector<double> hit,
-				std::vector<double> normal,
-				std::vector<double> c)
+				double hit[4],
+				double normal[4],
+				double c[3])
 {
-  std::vector<double> c2 = {0, 0, 0};
-  c = {0, 0, 0};
+  double c2[3] = {0, 0, 0};
+
+  c[0] = 0;
+  c[1] = 0;
+  c[2] = 0;
 
   for (int i = 0; i < s->getNbPoints(); i++)
     for(int j = 0; j < s->getNbShadowRay(); j++)
@@ -297,13 +302,16 @@ void Tracer::evalDirectRadiance(Ray* r, Object* o,
 }
 
 void Tracer::evalReflectRadiance(Ray* r, Object* o,
-				 std::vector<double> hit,
-				 std::vector<double> normal,
+				 double hit[4],
+				 double normal[4],
 				 int deep,
-				 std::vector<double> c)
+				 double c[3])
 {
   Ray* rRay = new Ray();
-  c = {0, 0, 0};
+
+  c[0] = 0;
+  c[1] = 0;
+  c[2] = 0;
 
   if (o->rRay(r, hit, normal, rRay))
     throwRay(rRay, deep - 1, c);
@@ -312,13 +320,16 @@ void Tracer::evalReflectRadiance(Ray* r, Object* o,
 }
 
 void Tracer::evalSendRadiance (Ray* r, Object* o,
-			       std::vector<double> hit,
-			       std::vector<double> normal,
+			       double hit[4],
+			       double normal[4],
 			       int deep,
-			       std::vector<double> c)
+			       double c[4])
 {
   Ray* sRay = new Ray();
-  c = {0, 0, 0};
+
+  c[0] = 0;
+  c[1] = 0;
+  c[2] = 0;
 
   if (o->tRay(r, hit, normal, sRay))
     throwRay(sRay, deep - 1, c);
@@ -327,11 +338,14 @@ void Tracer::evalSendRadiance (Ray* r, Object* o,
 }
 
 void Tracer::evalAmbiantRadiance (Object* o,
-				  std::vector<double> p,
-				  std::vector<double> c)
+				  double p[3],
+				  double c[3])
 {
-  std::vector<double> c2 = {0, 0, 0};
-  c = {0, 0, 0};
+  double c2[3] = {0, 0, 0};
+
+  c[0] = 0;
+  c[1] = 0;
+  c[2] = 0;
 
   o->getColor(p, c2);
   for (int i = 0; i < 3; i++)

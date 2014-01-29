@@ -2,7 +2,7 @@
 
 using namespace Lightning;
 
-Ambiant::Ambiant(std::vector<double> c)
+Ambiant::Ambiant(double c[3])
   : Light(c)
 {
 }

@@ -2,31 +2,32 @@
 
 using namespace Lightning;
 
-Directional::Directional(std::vector<double> dir,
-			 std::vector<double> c)
-  : Light(c), direction (dir)
+Directional::Directional(double* dir,
+			 double* c)
+  : Light(c)
 {
+  memcpy(direction, dir, 4 * sizeof(double));
 }
 
 Directional::~Directional(void)
 {
 }
 
-void Directional::getDirection (std::vector<double> dir)
+void Directional::getDirection (double dir[4])
 {
-  dir = direction;
+  memcpy(dir, direction, 4 * sizeof(double));
 }
 
 void Directional::getShiness(Ray* r,
-			     std::vector<double> p,
-			     std::vector<double> n,
+			     double p[4],
+			     double n[4],
 			     Object* o,
-			     std::vector<double> l)
+			     double l[3])
 {
 
-  std::vector<double> reflect = {0, 0, 0, 0};
-  std::vector<double> c2 = {0, 0, 0};
-  std::vector<double> dir = {0, 0, 0, 0};
+  double reflect[4] = {0, 0, 0, 0};
+  double c2[3] = {0, 0, 0};
+  double dir[4] = {0, 0, 0, 0};
   double ps1, ps2;
 
   o->getColor(p, c2);

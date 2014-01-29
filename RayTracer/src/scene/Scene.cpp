@@ -80,15 +80,15 @@ Directional* Scene::getDirectional(int i)
   return (*dLights)[i];
 }
 
-bool Scene::isPointRadiance(std::vector<double> p, int nlum)
+bool Scene::isPointRadiance(double* p, int nlum)
 {
   int i;
   bool radiance = true;
   double d;
 
-  std::vector<double> pos = {0, 0, 0, 0};
-  std::vector<double> dir = {0, 0, 0, 0};
-  std::vector<double> p2 = {0, 0, 0, 0};
+  double pos[4] = {0, 0, 0, 0};
+  double dir[4] = {0, 0, 0, 0};
+  double p2[4] = {0, 0, 0, 0};
 
   Ray* r = new Ray();
   double dLum;
@@ -136,14 +136,14 @@ bool Scene::isPointRadiance(std::vector<double> p, int nlum)
 }
 
 bool
-Scene::isDirectionalRadiance(std::vector<double> p,
+Scene::isDirectionalRadiance(double* p,
 			     int nlum)
 {
   int i;
   bool radiance = true;
   double d;
-  std::vector<double> p2 = {0, 0, 0, 0};
-  std::vector<double> dir = {0, 0, 0, 0};
+  double p2[4] = {0, 0, 0, 0};
+  double dir[4] = {0, 0, 0, 0};
   Ray* r = new Ray();
 
   for (int j = 0; j < 4; j++)
@@ -192,14 +192,14 @@ const int Scene::getNbDirectionals(void)
   return nbDirectional;
 }
 
-void Scene::getAmbiant(std::vector<double> lumAmb)
+void Scene::getAmbiant(double* lumAmb)
 {
   aLight->getColor(lumAmb);
 }
 
-void Scene::setBackground (std::vector<double> c)
+void Scene::setBackground (double* c)
 {
-  cBackground = c;
+  memcpy(cBackground, c, 3 * sizeof(double));
 }
 
 void Scene::setGlobalSetting (int mtl, int antil,  double aath,
@@ -244,7 +244,7 @@ const int Scene::getOutputWidth(void)
   return oWidth;
 }
 
-const std::vector<double> Scene::getBackground(void)
+const double* Scene::getBackground(void)
 {
   return cBackground;
 }
