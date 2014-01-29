@@ -1,3 +1,10 @@
+/*!
+ * \file Point.hpp
+ * \brief Classe pour les lumières ponctuelles
+ * \author Florian Thomassin, Victor Degliame
+ * \version 1.1
+ */
+
 #ifndef POINT_HPP
 # define POINT_HPP
 
@@ -10,16 +17,34 @@
 using namespace Form;
 using namespace Tools;
 
+/*!
+ * \namespace Lightning
+ * Regourpe tous les types de lumières
+ */
 namespace Lightning
 {
+  /*!
+   * \class Point
+   * \bref Classe pour les lumières ponctuelles
+   */
   class Point : public Light
   {
   private:
-    double position[4];
-    double c1, c2, c3;
+    double position[4];  /*!< Position de la lumière */
+    double c1, c2, c3;   /*!< Coefficient d'atténuations */
 
   public:
+    /*!
+     * \brief Constructeur
+     * Constructeur de la classe
+     * \param pos : position
+     * \param c : couleur
+     */
     Point(double *pos, double* c);
+    /*!
+     * \brief Destructeur
+     * Destructeur de la classe
+     */
     virtual ~Point(void);
 
   public:

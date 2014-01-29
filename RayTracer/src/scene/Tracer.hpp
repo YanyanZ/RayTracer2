@@ -1,6 +1,6 @@
 /*!
  * \file Camera.hpp
- * \brief Camera pour le RayTracer
+ * \brief Système de lancé de rayons
  * \author Florian Thomassin, Victor Degliame
  * \version 1.1
  */
@@ -136,25 +136,42 @@ namespace Engine
      * \param r : rayon
      * \param o : objet
      * \param hit : coordonné de l'intersection
-     * \param normal : normale
+     * \param deep : profondeur de lancé
      * \param coul : couleur que l'on récupère
      */
-    void evalReflectRadiance(Ray* r, Object* o,
-			     double hit[4],
-			     double normal[4],
-			     int deep,
-			     double coul[3]);
+    void evalReflectRadiance(Ray* r, Object* o, double hit[4],
+			     double normal[4], int deep, double coul[3]);
+    /*!
+     * \brief Détermine la couleur du la luminosité transmise
+     * \param r : rayon
+     * \param o : objet
+     * \param hit : coordonné de l'intersection
+     * \param deep : profondeur de lancé
+     * \param coul : couleur que l'on récupère
+     */
     void evalSendRadiance(Ray* r, Object* o,
 			  double hit[4],
 			  double normal[4],
 			  int deep,
 			  double coul[3]);
+    /*!
+     * \brief Détermine la couleur du la luminosité ambiante
+     * \param o : objet
+     * \param p : point
+     * \param coul : couleur que l'on récupère
+     */
     void evalAmbiantRadiance(Object* o,
 			     double p[3],
 			     double coul[3]);
 
   public:
+    /*!
+     * \brief Permet de créer la scène en lançant les rayons
+     */
     void createScene(void);
+    /*!
+     * \brief Permet de sauvegarder la scène dans une image ppm
+     */
     void saveScene(std::string output);
   };
 }
