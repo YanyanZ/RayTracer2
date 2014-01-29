@@ -7,7 +7,7 @@
 # include <iostream>
 
 # include <tools/Ray.hpp>
-# include <perlin/PerlinNoise.hpp>
+
 # include <texture/Checker.hpp>
 # include <tools/Polynomial.hpp>
 # include <texture/Mapper.hpp>
@@ -15,14 +15,13 @@
 
 using namespace Tools;
 using namespace Texture;
-using namespace Generator;
 
 namespace Form
 {
   class Object
   {
   public:
-    enum {COLOR, TEXTURE, PERLIN, CHECKER, NO};
+    enum {COLOR, TEXTURE, CHECKER, NO};
 
   protected:
     double epsilon;
@@ -40,8 +39,6 @@ namespace Form
   protected:
     Mapper *mapper;
     Checker *ccr;
-    PerlinNoise *pColor;
-    PerlinNoise *pNormale;
     Transformer * trans;
 
   public:
@@ -64,8 +61,6 @@ namespace Form
     void setTypePigment(int t);
     void setColor(double colo[3]);
     void setChecker(Checker* cc);
-    void setPerlin(PerlinNoise* pNoise);
-    void setPerlinNormal(PerlinNoise* pNoise);
     void setTypeNormal(int type);
     void setMapper(Mapper* mp);
 

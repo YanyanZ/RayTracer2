@@ -230,11 +230,6 @@ void Object::setColor(double colo[3])
   memcpy(colo, c, 3 * sizeof(double));
 }
 
-void Object::setPerlin (PerlinNoise* pNoise)
-{
-  pColor = pNoise;
-}
-
 void Object::setMapper (Mapper* mp)
 {
   mapper = mp;
@@ -243,11 +238,6 @@ void Object::setMapper (Mapper* mp)
 void Object::setChecker (Checker* cc)
 {
   ccr = cc;
-}
-
-void Object::setPerlinNormal(PerlinNoise* pNoise)
-{
-  pNormale = pNoise;
 }
 
 void Object::getColor (double p[4],
@@ -263,9 +253,6 @@ void Object::getColor (double p[4],
       break;
     case CHECKER:
       ccr->getChecker(p, colo);
-      break;
-    case PERLIN:
-      //pColor->PerlinColor(p, colo);
       break;
     case TEXTURE:
       trans->transformInv(p2, p);
@@ -284,9 +271,6 @@ void Object::checkNormal(double n[4],
   double rd[4];
   double tmp[4];
   double ps;
-
-  //if (tNormal == PERLIN)
-  //  pNormale->PerlinNormal(p, n);
 
   r->getDirection(tmp);
   trans->transformInv(rd,tmp);
