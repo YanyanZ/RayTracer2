@@ -3,14 +3,38 @@
 using namespace Tools;
 
 Transformer::Transformer(void)
-  : translation ({{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}}),
-    rotation  ({{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}}),
-    scale ({{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}}),
-    transformation ({{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}}),
-    invTranslation ({{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}}),
-    invRotation ({{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}}),
-    invScale ({{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}}),
-    invTransformation ({{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}})
+  : translation ({{0.0, 0.0, 0.0, 0.0},
+      {0.0, 0.0, 0.0, 0.0},
+      {0.0, 0.0, 0.0, 0.0},
+      {0.0, 0.0, 0.0, 0.0}}),
+    rotation ({{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0}}),
+    scale ({{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0}}),
+    transformation ({{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0}}),
+    invTranslation ({{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0}}),
+    invRotation ({{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0}}),
+    invScale ({{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0}}),
+    invTransformation ({{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0},
+	{0.0, 0.0, 0.0, 0.0}})
 {
 }
 
@@ -45,6 +69,8 @@ void Transformer::mult(std::vector<std::vector<double> >& res,
   int i, j, k;
   double val;
   std::vector<std::vector<double> > r = {{0.0, 0.0, 0.0, 0.0},
+					 {0.0, 0.0, 0.0, 0.0},
+					 {0.0, 0.0, 0.0, 0.0},
 					 {0.0, 0.0, 0.0, 0.0}};
 
   for (i = 0; i < 4; i++)
@@ -80,6 +106,8 @@ void Transformer::loadIdMatrix(std::vector<std::vector<double> > m)
 void Transformer::setTranslation(std::vector<double> trs)
 {
   std::vector<std::vector<double> > temp = {{0.0, 0.0, 0.0, 0.0},
+					    {0.0, 0.0, 0.0, 0.0},
+					    {0.0, 0.0, 0.0, 0.0},
 					    {0.0, 0.0, 0.0, 0.0}};
 
   loadIdMatrix(translation);
@@ -100,14 +128,28 @@ void Transformer::setTranslation(std::vector<double> trs)
 void Transformer::setRotation(std::vector<double> r)
 {
   std::vector<std::vector<double> > rx= {{0.0, 0.0, 0.0, 0.0},
+					 {0.0, 0.0, 0.0, 0.0},
+					 {0.0, 0.0, 0.0, 0.0},
 					 {0.0, 0.0, 0.0, 0.0}};
+
   std::vector<std::vector<double> > ry = {{0.0, 0.0, 0.0, 0.0},
+					  {0.0, 0.0, 0.0, 0.0},
+					  {0.0, 0.0, 0.0, 0.0},
 					  {0.0, 0.0, 0.0, 0.0}};
+
   std::vector<std::vector<double> > rz = {{0.0, 0.0, 0.0, 0.0},
+					  {0.0, 0.0, 0.0, 0.0},
+					  {0.0, 0.0, 0.0, 0.0},
 					  {0.0, 0.0, 0.0, 0.0}};
+
   std::vector<std::vector<double> > temp = {{0.0, 0.0, 0.0, 0.0},
+					    {0.0, 0.0, 0.0, 0.0},
+					    {0.0, 0.0, 0.0, 0.0},
 					    {0.0, 0.0, 0.0, 0.0}};
+
   std::vector<std::vector<double> > temp2 = {{0.0, 0.0, 0.0, 0.0},
+					     {0.0, 0.0, 0.0, 0.0},
+					     {0.0, 0.0, 0.0, 0.0},
 					    {0.0, 0.0, 0.0, 0.0}};
 
   loadIdMatrix(rx);
@@ -164,7 +206,10 @@ void Transformer::setRotation(std::vector<double> r)
 
 void Transformer::setScale(std::vector<double> s)
 {
-  std::vector<std::vector<double> > temp = {{0, 0, 0, 0}, {0, 0, 0, 0}};
+  std::vector<std::vector<double> > temp = {{0, 0, 0, 0},
+					    {0.0, 0.0, 0.0, 0.0},
+					    {0.0, 0.0, 0.0, 0.0},
+					    {0, 0, 0, 0}};
   loadIdMatrix(scale);
 
   for (int i = 0; i < 3; i++)

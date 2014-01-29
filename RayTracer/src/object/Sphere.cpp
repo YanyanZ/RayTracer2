@@ -16,8 +16,8 @@ double Sphere::hit(Ray* r,
 {
   double a, b, c;
   double delta;
-  double t1, t2, t;
-  double d;
+  double t1, t2, t = 0;
+  double d = 0;
 
   std::vector<double> p = {0, 0, 0, 0};
   std::vector<double> temp = {0, 0, 0, 0};

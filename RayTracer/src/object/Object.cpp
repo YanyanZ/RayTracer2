@@ -60,7 +60,7 @@ void Object::setN(double v)
 
 void Object::setShininess(double v)
 {
-  shininess = v;
+  shiness = v;
 }
 
 void Object::setTypePigment(int t)
@@ -70,7 +70,7 @@ void Object::setTypePigment(int t)
 
 void Object::setTypeNormal(int type)
 {
-  tNormale = type;
+  tNormal = type;
 }
 
 double Object::getRhoT(void)
@@ -116,7 +116,7 @@ Object::getN(void)
 
 double Object::getShininess(void)
 {
-  return shininess;
+  return shiness;
 }
 
 double Object::distance(std::vector<double> p1,
@@ -179,7 +179,7 @@ bool Object::tRay(Ray* r,
 
     r->getDirection(dir);
     for (int ii = 0; ii < 3; ii++)
-      dir[ii] = deviation * dir[ii] - coef * normal[ii];
+      dir[ii] = dev * dir[ii] - coef * normal[ii];
     dir[3] = 0;
 
     r2->setDirection(dir);
@@ -199,15 +199,15 @@ bool Object::rRay (Ray* r,
     return false;
   else
   {
-    rRay->setOrigin(i);
-    rRay->setIn(r->isIn());
+    r2->setOrigin(i);
+    r2->setIn(r->isIn());
 
     r->getDirection(dir);
     for (int j = 0; j < 3; j++)
       dir[j]= dir[j] - 2 * r->dot(normal) * normal[j];
     dir[3]=0;
 
-    rRay->setDirection(dir);
+    r2->setDirection(dir);
 
     return true;
   }
@@ -255,7 +255,7 @@ void Object::getColor (std::vector<double> p,
 
   switch (tPigment)
   {
-    case COLoR:
+    case COLOR:
       for (int i = 0; i < 3; i++)
 	colo[i] = (1 - rhoT) * c[i];
       break;
@@ -263,11 +263,11 @@ void Object::getColor (std::vector<double> p,
       ccr->getChecker(p, colo);
       break;
     case PERLIN:
-      pColor->PerlinColor(p, colo);
+      //pColor->PerlinColor(p, colo);
       break;
     case TEXTURE:
       trans->transformInv(p2, p);
-      mapper->getMapping(p2, colo);
+      //mapper->getMapping(p2, colo);
       break;
     default:
       break;
@@ -283,8 +283,8 @@ void Object::checkNormal(std::vector<double> n,
   std::vector<double> tmp = {0, 0, 0, 0};
   double ps;
 
-  if (tNormal == PERLIN)
-    pNormale->PerlinNormal(p, n);
+  //if (tNormal == PERLIN)
+  //  pNormale->PerlinNormal(p, n);
 
   r->getDirection(tmp);
   trans->transformInv(rd,tmp);

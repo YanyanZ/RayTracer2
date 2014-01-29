@@ -53,11 +53,10 @@ int main (int argc, char *argv[])
     o->setRhoA(0.3);
     o->setRhoD(0.3);
     o->setRhoS(0.9);
-    o->setRhoS(50);
     o->setRhoT(0.5);
     o->setColor(color);
     o->setN(1.0);
-
+    o->setShininess(50);
     int typePigment = Object::COLOR;
 
     std::vector<double> translate = {-1, 0, 4};

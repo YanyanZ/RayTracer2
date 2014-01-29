@@ -18,7 +18,7 @@ void Checker::setSize(double s)
   size = s;
 }
 
-void Checker::setColo1(std::vector<double> c)
+void Checker::setColor1(std::vector<double> c)
 {
   color1 = c;
 }
