@@ -15,12 +15,11 @@ namespace Form
   {
   public:
     Plan(void);
-    virtual ~plan(void);
+    virtual ~Plan(void);
 
   public:
-    double hit(Ray* r, std::vector<double> i);
-    void normal(std::vector<double> p, Ray* r,
-		std::vector<double> normal);
+    virtual double hit(Ray* r, double i[4]);
+    virtual void normal(double p[4], Ray* r, double normal[4]);
   };
 }
 
