@@ -20,7 +20,6 @@ double Sphere::hit(Ray* r,
   double d = 0;
 
   double p[4] = {0, 0, 0, 0};
-  double temp[4] = {0, 0, 0, 0};
   double pos[4] = {0, 0, 0, 0};
   double dir[4] = {0, 0, 0, 0};
   double pos2[4] = {0, 0, 0, 0};

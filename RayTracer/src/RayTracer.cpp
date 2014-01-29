@@ -50,7 +50,7 @@ int main (int argc, char *argv[])
     double l3ac[4] = {1, 1, 1};
 
     double campos[4] = {0.2, 0.0, -0.1};
-    double lookat[3] = {0, 0, 1};
+    double lookat[3] = {0, 0, 0};
     double fov = 130;
 
     Sphere* o = new Sphere(2.5);
