@@ -24,10 +24,10 @@ namespace Lightning
   public:
     void getDirection(std::vector<double> dir);
     void getShiness(Ray* r,
-		      std::vector<double> p,
-		      std::vector<double> n,
-		      Object* o,
-		      std::vector<double> l);
+		    std::vector<double> p,
+		    std::vector<double> n,
+		    Object* o,
+		    std::vector<double> l);
 
   };
 }
