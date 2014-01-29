@@ -4,7 +4,7 @@ SET(SOURCES #Box.cpp
 #  Cylinder.cpp
   Object.cpp
 #  Parallelogram.cpp
-#  Plan.cpp
+  Plan.cpp
 #  Pyramid3.cpp
 #  Pyramid4.cpp
   Sphere.cpp

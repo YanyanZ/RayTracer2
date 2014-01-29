@@ -9,6 +9,7 @@
 
 #include <scene/Scene.hpp>
 #include <object/Sphere.hpp>
+#include <object/Plan.hpp>
 
 using namespace Engine;
 using namespace Tools;
@@ -33,8 +34,8 @@ int main (int argc, char *argv[])
     int shadow = -1;
     int nbrays = 1;
 
-    double cBG[3] = {0, 0, 0};
-    double color[3] = {1, 0, 0};
+    double cBG[3] = {0.2, 0.3, 0.5};
+    double color[3] = {0, 0, 1};
 
     int c1 = 1;
     int c2 = 0;
@@ -46,7 +47,7 @@ int main (int argc, char *argv[])
     double l2pos[3] = {2, 1, 0};
     double l2c[4] = {1.0, 1.0, 1.0};
 
-    double l3ac[4] = {0.5, 0.5, 0.5};
+    double l3ac[4] = {1, 1, 1};
 
     double campos[4] = {0.2, 0.0, -0.1};
     double lookat[3] = {0, 0, 1};
@@ -56,13 +57,13 @@ int main (int argc, char *argv[])
     o->setRhoA(0.3);
     o->setRhoD(0.3);
     o->setRhoS(0.9);
-    o->setRhoT(0.5);
+    o->setRhoT(0.0);
     o->setColor(color);
     o->setN(1.0);
     o->setShininess(50);
     int typePigment = Object::COLOR;
 
-    double translate[3] = {-1, 0, 4};
+    double translate[3] = {2, 0, 4};
     double rotate[3] = {0, 0, 0};
     double scale[4] = {1.0, 1.0, 1.0};
 
@@ -75,6 +76,29 @@ int main (int argc, char *argv[])
     o->setTransformer(trans);
     o->setTypePigment(typePigment);
     o->setTypeNormal(typeNormale);
+
+    Plan* p = new Plan();
+    p->setRhoA(0.2);
+    p->setRhoD(0.4);
+    p->setRhoS(0.8);
+    p->setRhoT(0.0);
+    p->setColor(color);
+    p->setN(1.0);
+    p->setShininess(40);
+
+    double ptranslate[3] = {-2, 0, 0};
+    double protate[3] = {0, 0, 0};
+    double pscale[4] = {1.0, 1.0, 1.0};
+    double pcolor[3] = {0.1, 0.1, 0.5};
+    p->setColor(pcolor);
+
+    Transformer* trans2 = new Transformer();
+    trans2->setTranslation(ptranslate);
+    trans2->setRotation(protate);
+    trans2->setScale(pscale);
+    p->setTransformer(trans2);
+    p->setTypePigment(typePigment);
+    p->setTypeNormal(typeNormale);
 
     s->setBackground(cBG);
     s->setGlobalSetting(max_trace_level, anti, threshold, shadow,
@@ -98,6 +122,7 @@ int main (int argc, char *argv[])
     s->addPoint(lp2);
 
     s->addObject(o);
+    s->addObject(p);
 
     Tracer* t = new Tracer(s);
 

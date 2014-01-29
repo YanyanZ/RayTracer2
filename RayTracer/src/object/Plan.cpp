@@ -1,5 +1,7 @@
 # include <object/Plan.hpp>
 
+using namespace Form;
+
 Plan::Plan(void)
  : Object()
 {
@@ -9,16 +11,15 @@ Plan::~Plan(void)
 {
 }
 
-double Plan::hit(Ray* r, std::vector<double> i)
+double Plan::hit(Ray* r, double i[4])
 {
   double d;
 
-  std::vector<double> p = {0, 0, 0, 0};
-  std::vector<double> temp = {0, 0, 0, 0};
-  std::vector<double> pos = {0, 0, 0, 0};
-  std::vector<double> dir = {0, 0, 0, 0};
-  std::vector<double> pos2 = {0, 0, 0, 0};
-  std::vector<double> dir2 = {0, 0, 0, 0};
+  double p[4] = {0, 0, 0, 0};
+  double pos[4] = {0, 0, 0, 0};
+  double dir[4] = {0, 0, 0, 0};
+  double pos2[4] = {0, 0, 0, 0};
+  double dir2[4] = {0, 0, 0, 0};
 
   r->getOrigin(pos);
   r->getDirection(dir);
@@ -49,12 +50,11 @@ double Plan::hit(Ray* r, std::vector<double> i)
     return MAXDOUBLE;
 }
 
-void Plan::normal(std::vector<double> p, Ray* r,
-		  std::vector<double> normal)
+void Plan::normal(double p[4], Ray* r, double normal[4])
 {
-  std::vector<double> p2 = {0, 0, 0, 0};
+  double p2[4] = {0, 0, 0, 0};
 
-  trans->transformationInv(p2, p);
+  trans->transformInv(p2, p);
 
   normal[0] = 1;
   normal[1] = 0;
