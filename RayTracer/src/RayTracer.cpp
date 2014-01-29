@@ -1,7 +1,6 @@
 //# include <parser/SceneParser.hpp>
-# include <vector>
-
 # include <scene/Tracer.hpp>
+# include <vector>
 
 #include <light/Ambiant.hpp>
 #include <light/Point.hpp>
@@ -20,7 +19,11 @@ int main (int argc, char *argv[])
 {
   if (argc == 3)
   {
-    Scene* s = new Scene();
+    /* lecture et recuperation de la description de la scene */
+    //SceneParser sp(argv[1]);
+    //sp.parse();
+    
+    Scene* s = new Scene(); //sp.getScene();
 
     double max_trace_level = 3.0;
     int owidth = 1024;
