@@ -10,6 +10,7 @@
 #include <scene/Scene.hpp>
 #include <object/Sphere.hpp>
 #include <object/Plan.hpp>
+#include <object/Triangle.hpp>
 
 using namespace Engine;
 using namespace Tools;
@@ -23,7 +24,7 @@ int main (int argc, char *argv[])
     /* lecture et recuperation de la description de la scene */
     SceneParser sp(argv[1]);
     sp.parse();
-    
+
     Scene* s = sp.getScene();
 
     int c1 = 0;
@@ -39,7 +40,14 @@ int main (int argc, char *argv[])
 
     double l3ac[4] = {1, 1, 1};
 
+    double sm1[4] = {0, 0, 0, 0};
+    double sm2[4] = {1, 0, 1, 0};
+    double sm3[4] = {0, 2, 0, 0};
+
     Sphere* o = new Sphere(5);
+    Triangle* tr = new Triangle(sm1, sm2, sm3);
+    // Les autres paramettres sont identique au cercle et plan. La seul chose qui change
+    // ce sont les constructeurs
     o->setRhoA(0);
     o->setRhoD(0);
     o->setRhoS(1);

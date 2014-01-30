@@ -8,7 +8,7 @@ void SceneParser::parse(void)
     // if a scene already exists, delete it.
     if (s)
         delete s;
-    
+
     s = new Engine::Scene();
     double max_trace_level = 3.0;
     int owidth = 1024;
@@ -27,7 +27,7 @@ void SceneParser::parse(void)
     xml_document doc;
 
     xml_parse_result result = doc.load_file(fileName.c_str());
-    
+
     if (!result)
         std::cerr << "Parsing failed on file: " << fileName << std::endl;
 

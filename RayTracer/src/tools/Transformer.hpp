@@ -15,7 +15,6 @@ namespace Tools
     double rotation[4][4];
     double scale[4][4];
     double transformation[4][4];
-    double ptransformation[4][4];
 
   public:
     double invTranslation[4][4];

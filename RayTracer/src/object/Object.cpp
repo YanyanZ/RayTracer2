@@ -227,7 +227,7 @@ void Object::normal(double p[4], Ray* r,
 
 void Object::setColor(double colo[3])
 {
-  memcpy(colo, c, 3 * sizeof(double));
+  memcpy(c, colo, 3 * sizeof(double));
 }
 
 void Object::setMapper (Mapper* mp)
@@ -241,7 +241,7 @@ void Object::setChecker (Checker* cc)
 }
 
 void Object::getColor (double p[4],
-		       double colo[3])
+		       double* colo)
 {
   double p2[4];
 

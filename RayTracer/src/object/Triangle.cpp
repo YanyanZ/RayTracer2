@@ -2,25 +2,27 @@
 
 using namespace Form;
 
-Triangle::Triangle (std::vector<double> pp1, std::vector<double> pp2,
-		    std::vector<double> pp3)
-  : Object(), p1 (pp1), p2 (pp2), p3 (pp3)
+Triangle::Triangle (double pp1[4], double pp2[4], double pp3[4])
+  : Object()
 {
+  memcpy(p1, pp1, 4 * sizeof(double));
+  memcpy(p2, pp2, 4 * sizeof(double));
+  memcpy(p3, pp3, 4 * sizeof(double));
 }
 
 Triangle::~Triangle(void)
 {
 }
 
-double Triangle::intersection (Ray* r, std::vector<double> i)
+double Triangle::hit(Ray* r, double i[4])
 {
   double dist;
 
-  std::vector<double> p = {0, 0, 0, 0};
-  std::vector<double> pos = {0, 0, 0, 0};
-  std::vector<double> dir = {0, 0, 0, 0};
-  std::vector<double> pos2 = {0, 0, 0, 0};
-  std::vector<double> dir2 = {0, 0, 0, 0};
+  double p[4] = {0, 0, 0, 0};
+  double pos[4] = {0, 0, 0, 0};
+  double dir[4] = {0, 0, 0, 0};
+  double pos2[4] = {0, 0, 0, 0};
+  double dir2[4] = {0, 0, 0, 0};
 
   r->getOrigin (pos);
   r->getDirection (dir);
@@ -72,14 +74,13 @@ double Triangle::intersection (Ray* r, std::vector<double> i)
   return dist;
 }
 
-void Triangle::normal(std::vector<double> p, Ray* r,
-		      std::vector<double> normal)
+void Triangle::normal(double p[4], Ray* r, double normal[4])
 {
-  std::vector<double> pt = {0, 0, 0, 0};
-  std::vector<double> v1 = {p2[0] - p1[0], p2[1] - p1[1],
-			    p2[2] - p1[2]};
-  std::vector<double> v2 = {p3[0] - p1[0], p3[1] - p1[1],
-			    p3[2] - p1[2]};
+  double pt[4] = {0, 0, 0, 0};
+  double v1[4] = {p2[0] - p1[0], p2[1] - p1[1],
+		  p2[2] - p1[2]};
+  double v2[4] = {p3[0] - p1[0], p3[1] - p1[1],
+		  p3[2] - p1[2]};
 
   trans->transformInv(pt, p);
   normal[0] = v1[1] * v2[2] - v1[2] * v2[1];
