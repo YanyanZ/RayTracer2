@@ -8,9 +8,9 @@
     <shadow value="-1"/>
     <nbRays value="1"/>
 
-    <cBG r="0.2" g="0.3" b="0.5"/>
+    <cBG r="0.2" g="0.2" b="0.8"/>
     <camPos x="0.2" y="0.0" z="-0.1"/>
-    <lookAt x="0.0" y="0.0" z="0.0"/>
+    <lookAt x="0.0" y="0.0" z="1.0"/>
 
     <fov value="130.0"/>
 </scene>

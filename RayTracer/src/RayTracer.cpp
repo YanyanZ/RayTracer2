@@ -27,18 +27,18 @@ int main (int argc, char *argv[])
 
     Scene* s = sp.getScene();
 
-    int c1 = 0;
+    int c1 = 1;
     int c2 = 0;
     int c3 = 0;
-    double color[3] = {1, 1, 1};
+    double color[3] = {1, 0, 0};
 
     double l1pos[3] = {3, -5, 0};
-    double l1c[4] = {1.0, 1.0, 1.0};
+    double l1c[3] = {1.0, 1.0, 1.0};
 
     double l2pos[3] = {2, 1, 0};
-    double l2c[4] = {1.0, 1.0, 1.0};
+    double l2c[3] = {1.0, 1.0, 1.0};
 
-    double l3ac[4] = {1, 1, 1};
+    double l3ac[3] = {1, 1, 1};
 
     double sm1[4] = {0, 0, 0, 0};
     double sm2[4] = {1, 0, 1, 0};
@@ -48,16 +48,17 @@ int main (int argc, char *argv[])
     Triangle* tr = new Triangle(sm1, sm2, sm3);
     // Les autres paramettres sont identique au cercle et plan. La seul chose qui change
     // ce sont les constructeurs
-    o->setRhoA(0);
-    o->setRhoD(0);
-    o->setRhoS(1);
+    o->setRhoA(0.3);
+    o->setRhoD(0.3);
+    o->setRhoS(0.9);
+    o->setRhoR(0.5);
     o->setRhoT(0.5);
     o->setColor(color);
     o->setN(1.0);
     o->setShininess(50);
     int typePigment = Object::COLOR;
 
-    double translate[3] = {2, 3, 10};
+    double translate[3] = {-1, 0, 4};
     double rotate[3] = {0, 0, 0};
     double scale[4] = {1.0, 1.0, 1.0};
 
@@ -82,7 +83,7 @@ int main (int argc, char *argv[])
 
     double ptranslate[3] = {-2, 0, 0};
     double protate[3] = {0, 0, 0};
-    double pscale[4] = {1.0, 1.0, 1.0};
+    double pscale[3] = {1.0, 1.0, 1.0};
     double pcolor[3] = {0.1, 0.1, 0.5};
     p->setColor(pcolor);
 
@@ -106,7 +107,7 @@ int main (int argc, char *argv[])
     s->addPoint(lp2);
 
     s->addObject(o);
-    s->addObject(p);
+    //s->addObject(p);
 
     Tracer* t = new Tracer(s);
 
