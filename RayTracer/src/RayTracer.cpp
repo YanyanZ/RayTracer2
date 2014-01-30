@@ -1,4 +1,4 @@
-//# include <parser/SceneParser.hpp>
+# include <parser/SceneParser.hpp>
 # include <scene/Tracer.hpp>
 # include <vector>
 
@@ -21,25 +21,15 @@ int main (int argc, char *argv[])
   if (argc == 3)
   {
     /* lecture et recuperation de la description de la scene */
-    //SceneParser sp(argv[1]);
-    //sp.parse();
+    SceneParser sp(argv[1]);
+    sp.parse();
     
-    Scene* s = new Scene(); //sp.getScene();
+    Scene* s = sp.getScene();
 
-    double max_trace_level = 3.0;
-    int owidth = 1024;
-    int oheight = 768;
-    int anti = 1;
-    double threshold = 0.3;
-    int shadow = -1;
-    int nbrays = 1;
-
-    double cBG[3] = {0.2, 0.3, 0.5};
-    double color[3] = {0, 0, 1};
-
-    int c1 = 1;
+    int c1 = 0;
     int c2 = 0;
     int c3 = 0;
+    double color[3] = {1, 1, 1};
 
     double l1pos[3] = {3, -5, 0};
     double l1c[4] = {1.0, 1.0, 1.0};
@@ -49,21 +39,17 @@ int main (int argc, char *argv[])
 
     double l3ac[4] = {1, 1, 1};
 
-    double campos[4] = {0.2, 0.0, -0.1};
-    double lookat[3] = {0, 0, 0};
-    double fov = 130;
-
-    Sphere* o = new Sphere(2.5);
-    o->setRhoA(0.3);
-    o->setRhoD(0.3);
-    o->setRhoS(0.9);
-    o->setRhoT(0.0);
+    Sphere* o = new Sphere(5);
+    o->setRhoA(0);
+    o->setRhoD(0);
+    o->setRhoS(1);
+    o->setRhoT(0.5);
     o->setColor(color);
     o->setN(1.0);
     o->setShininess(50);
     int typePigment = Object::COLOR;
 
-    double translate[3] = {2, 0, 4};
+    double translate[3] = {2, 3, 10};
     double rotate[3] = {0, 0, 0};
     double scale[4] = {1.0, 1.0, 1.0};
 
@@ -100,18 +86,8 @@ int main (int argc, char *argv[])
     p->setTypePigment(typePigment);
     p->setTypeNormal(typeNormale);
 
-    s->setBackground(cBG);
-    s->setGlobalSetting(max_trace_level, anti, threshold, shadow,
-			nbrays, oheight, owidth);
-
-    Camera* c = new Camera(campos, lookat);
-    c->setTProjection(Camera::PERSPECTIVE);
-    c->setSProjection(10);
-    c->setFov(fov);
-    s->changeCamera (c);
-
     Ambiant* la = new Ambiant(l3ac);
-    s->addAmbiant (la);
+    s->addAmbiant(la);
 
     Point* lp1 = new Point(l1pos, l1c);
     lp1->setDimming(c1, c2, c3);

@@ -14,7 +14,7 @@ namespace Form
   class Sphere : public Object
   {
   private:
-    double ray;;
+    double ray;
 
   public:
     Sphere(double r);

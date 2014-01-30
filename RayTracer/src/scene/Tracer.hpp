@@ -1,5 +1,5 @@
 /*!
- * \file Camera.hpp
+ * \file Tracer.hpp
  * \brief Système de lancé de rayons
  * \author Florian Thomassin, Victor Degliame
  * \version 1.1
@@ -42,8 +42,8 @@ namespace Engine
   {
   private:
     Scene* s;          /*!< Classe de la scène */
-    double pheight;    /*!< Hauteur recalculé */
-    double pwidth;     /*!< Largeur recalculé */
+    double pheight;    /*!< Hauteur recalculée */
+    double pwidth;     /*!< Largeur recalculée */
     double pasx;       /*!< Pas de déplacement sur l'axe x */
     double pasy;       /*!< Pas de déplacement sur l'axe y */
 
@@ -90,7 +90,7 @@ namespace Engine
 
   public:
     /*!
-     * \brief Initsialise un rayon
+     * \brief Initialise un rayon
      * \param x : coordonnée en x
      * \param y : coordonéee en y
      * \param r : rayon
@@ -113,11 +113,11 @@ namespace Engine
 
   public:
     /*!
-     * \brief Détermine si un rayon à toucher un objet
+     * \brief Détermine si un rayon a touché un objet
      * \param r : rayon
      * \param hit : coordonné de l'intersection (récuperation par memcpy)
-     * \param o : objet tester
-     * \return Distance si contacte
+     * \param o : objet testé
+     * \return Distance si contact
      */
     double evalHit(Ray* r, double hit[4], Object** o);
     /*!

@@ -97,15 +97,15 @@ namespace Engine
     /*!
      * \brief Test s'il y a une illumination ponctuelle
      * \param p : point
-     * \param nlum : nombre de lumière
-     * \return Si le test est vérifier true sinon false
+     * \param nlum : nombre de lumières
+     * \return Si le test est vérifié true sinon false
      */
     bool isPointRadiance(double* p, int nlum);
     /*!
      * \brief Test s'il y a une illumination directionelle
      * \param p : point
-     * \param nlum : nombre de lumière
-     * \return Si le test est vérifier true sinon false
+     * \param nlum : nombre de lumières
+     * \return Si le test est vérifié true sinon false
      */
     bool isDirectionalRadiance(double* p, int nlum);
 
