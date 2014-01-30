@@ -82,6 +82,57 @@ void parsePlan(Engine::Scene* s, xml_node n)
 
     s->addObject(o);
 }
+
+void parseTriangle(Engine::Scene* s, xml_node n)
+{
+    int typePigment = Object::COLOR;
+    int typeNormale = Object::NO;
+    
+    xml_node color = n.child("color");
+    xml_node translation = n.child("translation");
+    xml_node rotation = n.child("rotation");
+    xml_node scale = n.child("scale");
+    xml_node vertex1 = n.child("v1");
+    xml_node vertex2 = n.child("v2");
+    xml_node vertex3 = n.child("v3");
+    
+    double sm1[4] = {vertex1.attribute("x").as_double(), vertex1.attribute("y").as_double(),
+        vertex1.attribute("z").as_double(), 0};
+    double sm2[4] = {vertex2.attribute("x").as_double(), vertex2.attribute("y").as_double(),
+        vertex2.attribute("z").as_double(), 0};
+    double sm3[4] = {vertex3.attribute("x").as_double(), vertex3.attribute("y").as_double(),
+        vertex3.attribute("z").as_double(), 0};
+
+    double colors[3] = {color.attribute("r").as_double(), color.attribute("g").as_double(),
+        color.attribute("b").as_double()};
+    Form::Triangle* o = new Form::Triangle(sm1, sm2, sm3);
+    o->setRhoA(n.attribute("rhoA").as_double());
+    o->setRhoD(n.attribute("rhoD").as_double());
+    o->setRhoR(n.attribute("rhoR").as_double());
+    o->setRhoS(n.attribute("rhoS").as_double());
+    o->setRhoT(n.attribute("rhoT").as_double());
+    o->setColor(colors);
+    o->setN(n.attribute("N").as_double());
+    o->setShininess(n.attribute("shininess").as_double());
+
+    double translate[3] = {translation.attribute("x").as_double(),
+        translation.attribute("y").as_double(), translation.attribute("z").as_double()};
+    double rotate[3] = {rotation.attribute("x").as_double(),
+        rotation.attribute("y").as_double(), rotation.attribute("z").as_double()};
+    double scales[4] = {scale.attribute("x").as_double(),
+        scale.attribute("y").as_double(), scale.attribute("z").as_double()};
+
+    Transformer* trans = new Transformer();
+    trans->setTranslation(translate);
+    trans->setRotation(rotate);
+    trans->setScale(scales);
+    o->setTransformer(trans);
+    o->setTypePigment(typePigment);
+    o->setTypeNormal(typeNormale);
+
+    s->addObject(o);
+}
+
 void SceneParser::parse(void)
 {
     // if a scene already exists, delete it.
@@ -154,8 +205,8 @@ void SceneParser::parse(void)
             parseSphere(s, *it);
         else if (name == "plan")
             parsePlan(s, *it);
-        //else if (name == "triangle")
-        //    parseTriangle(s, *it);
+        else if (name == "triangle")
+            parseTriangle(s, *it);
 
     }
     Engine::Camera* c = new Engine::Camera(campos, lookat);
