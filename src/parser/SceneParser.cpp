@@ -133,6 +133,34 @@ void parseTriangle(Engine::Scene* s, xml_node n)
     s->addObject(o);
 }
 
+void parsePointL(Engine::Scene* s, xml_node n)
+{
+    xml_node color = n.child("color");
+    xml_node position = n.child("position");
+    
+    double l1pos[3] = {position.attribute("x").as_double(), position.attribute("y").as_double(),
+        position.attribute("z").as_double()};
+    double l1c[4] = {color.attribute("r").as_double(), color.attribute("g").as_double(),
+        color.attribute("b").as_double()};
+
+    Lightning::Point* lp1 = new Lightning::Point(l1pos, l1c);
+    lp1->setDimming(0.0, 0.0, 0.0);
+
+    s->addPoint(lp1);
+}
+
+void parseAmbiant(Engine::Scene* s, xml_node n)
+{
+    xml_node color = n.child("color");
+    
+    double lc[4] = {color.attribute("r").as_double(), color.attribute("g").as_double(),
+        color.attribute("b").as_double()};
+
+    Lightning::Ambiant* la = new Lightning::Ambiant(lc);
+
+    s->addAmbiant(la);
+}
+
 void SceneParser::parse(void)
 {
     // if a scene already exists, delete it.
@@ -207,6 +235,10 @@ void SceneParser::parse(void)
             parsePlan(s, *it);
         else if (name == "triangle")
             parseTriangle(s, *it);
+        else if (name == "ambiant")
+            parseAmbiant(s, *it);
+        else if (name == "pointLight")
+            parsePointL(s, *it);
 
     }
     Engine::Camera* c = new Engine::Camera(campos, lookat);

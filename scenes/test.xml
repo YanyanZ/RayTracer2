@@ -13,6 +13,20 @@
     <lookAt x="0.0" y="0.0" z="1.0"/>
     <fov value="130.0"/>
 
+    <ambiant>
+        <color r="1" g="1" b="1"/>
+    </ambiant>
+
+    <pointLight>
+        <color r="1" g="1" b="1"/>
+        <position x="3" y="-5" z="0"/>
+    </pointLight>
+
+    <pointLight>
+        <color r="1" g="1" b="1"/>
+        <position x="2" y="1" z="0"/>
+    </pointLight>
+    
     <sphere radius="5" rhoA="0.8" rhoD="1" rhoR="1" rhoS="1"
         rhoT="0" N="0.5" shininess="50">
         <color r="0" g="1" b="0"/>
