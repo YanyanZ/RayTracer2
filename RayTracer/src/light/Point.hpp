@@ -48,19 +48,39 @@ namespace Lightning
     virtual ~Point(void);
 
   public:
+    /*!
+     * \brief Définit les coefficients d'attenuations
+     * \param cc1 : coef 1
+     * \param cc2 : coef 2
+     * \param cc3 : coef 3
+     */
     void setDimming(double cc1,double cc2,double cc3);
 
   public:
+    /*!
+     * \brief Récupère le coef c1
+     * \resultat coef c1
+     */
     const double getC1 (void);
+    /*!
+     * \brief Récupère le coef c2
+     * \resultat coef c2
+     */
     const double getC2 (void);
+    /*!
+     * \brief Récupère le coef c3
+     * \resultat coef c3
+     */
     const double getC3 (void);
 
   public:
-    void getShiness(Ray* r,
-		    double p[4],
-		    double n[4],
-		    Object* o,
-		    double l[3]);
+    /*!
+     * \brief Récupère l'exposition
+     */
+    void getShiness(Ray* r, double p[4], double n[4], Object* o, double l[3]);
+    /*
+     * \brief Récupère la position
+     */
     void getPosition (double pos[4]);
   };
 }
