@@ -14,6 +14,7 @@
 # include <scene/Tracer.hpp>
 # include <object/Sphere.hpp>
 # include <object/Plan.hpp>
+# include <object/Triangle.hpp>
 
 class SceneParser
 {

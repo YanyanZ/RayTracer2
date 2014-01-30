@@ -1,16 +1,4 @@
 # include <parser/SceneParser.hpp>
-# include <scene/Tracer.hpp>
-# include <vector>
-
-#include <light/Ambiant.hpp>
-#include <light/Point.hpp>
-
-#include <tools/Transformer.hpp>
-
-#include <scene/Scene.hpp>
-#include <object/Sphere.hpp>
-#include <object/Plan.hpp>
-#include <object/Triangle.hpp>
 
 using namespace Engine;
 using namespace Tools;
