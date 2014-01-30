@@ -40,37 +40,15 @@ int main (int argc, char *argv[])
 
     double l3ac[4] = {1, 1, 1};
 
-    double sm1[4] = {0, 0, 0, 0};
-    double sm2[4] = {1, 0, 1, 0};
-    double sm3[4] = {0, 2, 0, 0};
+    //double sm1[4] = {0, 0, 0, 0};
+    //double sm2[4] = {1, 0, 1, 0};
+    //double sm3[4] = {0, 2, 0, 0};
 
-    Sphere* o = new Sphere(5);
-    Triangle* tr = new Triangle(sm1, sm2, sm3);
+    //Triangle* tr = new Triangle(sm1, sm2, sm3);
     // Les autres paramettres sont identique au cercle et plan. La seul chose qui change
     // ce sont les constructeurs
-    o->setRhoA(0);
-    o->setRhoD(0);
-    o->setRhoS(1);
-    o->setRhoT(0.5);
-    o->setColor(color);
-    o->setN(1.0);
-    o->setShininess(50);
     int typePigment = Object::COLOR;
-
-    double translate[3] = {2, 3, 10};
-    double rotate[3] = {0, 0, 0};
-    double scale[4] = {1.0, 1.0, 1.0};
-
     int typeNormale = Object::NO;
-
-    Transformer* trans = new Transformer();
-    trans->setTranslation(translate);
-    trans->setRotation(rotate);
-    trans->setScale(scale);
-    o->setTransformer(trans);
-    o->setTypePigment(typePigment);
-    o->setTypeNormal(typeNormale);
-
     Plan* p = new Plan();
     p->setRhoA(0.2);
     p->setRhoD(0.4);
@@ -105,8 +83,6 @@ int main (int argc, char *argv[])
     lp2->setDimming(c1, c2, c3);
     s->addPoint(lp2);
 
-    s->addObject(o);
-    s->addObject(p);
 
     Tracer* t = new Tracer(s);
 
